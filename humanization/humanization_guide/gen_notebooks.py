@@ -24,7 +24,20 @@ def co(s):
             "source": s.splitlines(keepends=True)}
 
 
+
+# ── Colab 배지 ────────────────────────────────────────────────────────────────
+# GitHub 에서 노트북을 열면 이 배지를 눌러 바로 Colab 으로 넘어갈 수 있다.
+COLAB_REPO   = "CONNECTS-SCV/bio-guides"
+GUIDE_PREFIX = "humanization/humanization_guide"          # 저장소 루트 기준 이 가이드의 경로
+
+def colab_badge_cell(rel_path):
+    url = f"https://colab.research.google.com/github/{COLAB_REPO}/blob/main/{GUIDE_PREFIX}/{rel_path}".replace(" ", "%20")
+    return {"cell_type": "markdown", "metadata": {},
+            "source": [f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({url})\n"]}
+
+
 def save(cells, folder, name, title):
+    cells = [colab_badge_cell(f"{folder}/{name}")] + cells
     for i, cell in enumerate(cells):            # nbformat 4.5+ : 셀 id 부여
         cell.setdefault("id", f"c{i:02d}")
     doc = {"cells": cells, "metadata": {
@@ -49,6 +62,11 @@ PIP_PKGS = "__PIP__"     # 없는 것만 설치
 
 import os, sys, json, time, shutil, pathlib, subprocess, importlib, importlib.util
 IN_COLAB = "google.colab" in sys.modules
+
+# HuggingFace 가중치 다운로드가 '멈춘 채' 매달리는 일을 막습니다.
+# (멈춤은 예외가 안 나서 폴백이 안 걸립니다 — 타임아웃을 걸어 실패로 바꿔야 data/ 로 이어집니다)
+os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")   # 스트림 30초 무응답 → 끊고 재시도
+os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "15")
 
 def _run(cmd, check=True):
     print("$", cmd)
@@ -502,7 +520,11 @@ def mutations(par, hum):
             for i, (a, b) in enumerate(zip(par, hum)) if a != b]
 
 HAVE_SAPIENS = _have("sapiens")
-if HAVE_SAPIENS:
+# 첫 실행은 HuggingFace 에서 Sapiens 가중치(~2MB)를 받습니다. HF 가 느리면 실패할 수 있어
+# 두 번까지 재시도하고, 그래도 안 되면 레퍼런스(data/)로 넘어갑니다 — 실습은 끊기지 않습니다.
+for _attempt in range(1, 3):
+    if not HAVE_SAPIENS:
+        break
     try:
         import sapiens
         t0 = time.time()
@@ -520,9 +542,14 @@ if HAVE_SAPIENS:
         mut_h = pd.DataFrame(mutations(VH, hum_h)); mut_h.to_csv(MY / "mutations_VH.csv", index=False)
         mut_l = pd.DataFrame(mutations(VL, hum_l)); mut_l.to_csv(MY / "mutations_VL.csv", index=False)
         print("→", MY / "sapiens_humanized_noguard.fasta")
+        break
     except Exception as e:
-        print("Sapiens 실행 실패:", type(e).__name__, str(e)[:160])
-        HAVE_SAPIENS = False
+        print(f"Sapiens 실행 실패({_attempt}/2):", type(e).__name__, str(e)[:160])
+        if _attempt == 1:
+            print("  · HuggingFace 다운로드 지연일 수 있어 5초 뒤 다시 시도합니다")
+            time.sleep(5)
+        else:
+            HAVE_SAPIENS = False
 
 if not HAVE_SAPIENS:
     print("[레퍼런스] data/ 의 Sapiens 실행 산출물로 진행합니다")

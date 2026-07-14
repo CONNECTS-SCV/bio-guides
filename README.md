@@ -33,7 +33,6 @@ boltzgen/advanced/        BoltzGen 과정 (챕터 01~12 + 노트북 10)
 ab db/antibody_db_guide/  항체 DB 분석 과정 (챕터 01~10 + 노트북)
 humanization/             항체 인간화 과정
   humanization_guide/       챕터 01~11 + 노트북
-  _source/                  분할 전 원본 문서(아카이브)
 ```
 
 각 과정 폴더에는 `build_combined.py`(챕터 → 단일 `combined.md`)와 `gen_notebooks.py`(노트북 생성기)가 있습니다. **노트북은 손으로 고치지 말고 생성기를 고친 뒤 재생성**하세요.

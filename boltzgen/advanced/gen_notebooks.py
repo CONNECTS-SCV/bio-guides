@@ -13,7 +13,20 @@ ROOT = pathlib.Path(__file__).parent
 def md(t):  return {"cell_type": "markdown", "metadata": {}, "source": t.splitlines(keepends=True)}
 def co(s):  return {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [],
                     "source": s.splitlines(keepends=True)}
+
+# ── Colab 배지 ────────────────────────────────────────────────────────────────
+# GitHub 에서 노트북을 열면 이 배지를 눌러 바로 Colab 으로 넘어갈 수 있다.
+COLAB_REPO   = "CONNECTS-SCV/bio-guides"
+GUIDE_PREFIX = "boltzgen/advanced"          # 저장소 루트 기준 이 가이드의 경로
+
+def colab_badge_cell(rel_path):
+    url = f"https://colab.research.google.com/github/{COLAB_REPO}/blob/main/{GUIDE_PREFIX}/{rel_path}".replace(" ", "%20")
+    return {"cell_type": "markdown", "metadata": {},
+            "source": [f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({url})\n"]}
+
+
 def save(cells, folder, name, title):
+    cells = [colab_badge_cell(f"{folder}/{name}")] + cells
     for i, cell in enumerate(cells):          # nbformat 4.5+ : 셀 id 부여(경고 제거)
         cell.setdefault("id", f"c{i:02d}")
     doc = {"cells": cells, "metadata": {
@@ -38,6 +51,11 @@ PIP_PKGS = "__PIP__"   # 없으면 설치할 분석 라이브러리
 
 import os, sys, subprocess, pathlib
 IN_COLAB = "google.colab" in sys.modules
+
+# HuggingFace 가중치 다운로드가 '멈춘 채' 매달리는 일을 막습니다.
+# (멈춤은 예외가 안 나서 폴백이 안 걸립니다 — 타임아웃을 걸어 실패로 바꿔야 data/ 로 이어집니다)
+os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")   # 스트림 30초 무응답 → 끊고 재시도
+os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "15")
 
 def _run(cmd):
     print("$", cmd); subprocess.run(cmd, shell=True, check=True)

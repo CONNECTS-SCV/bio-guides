@@ -56,6 +56,11 @@ PIN_TRANSFORMERS = @PIN@    # IgFold 체크포인트가 요구하는 transformer
 import os, sys, subprocess, pathlib, shutil, importlib.util
 IN_COLAB = "google.colab" in sys.modules
 
+# HuggingFace 가중치 다운로드가 '멈춘 채' 매달리는 일을 막습니다.
+# (멈춤은 예외가 안 나서 폴백이 안 걸립니다 — 타임아웃을 걸어 실패로 바꿔야 data/ 로 이어집니다)
+os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")   # 스트림 30초 무응답 → 끊고 재시도
+os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "15")
+
 def _run(cmd):
     print("$", cmd); subprocess.run(cmd, shell=True, check=True)
 
@@ -184,7 +189,20 @@ def header(chapter_dir, chapter_md, title, what):
 **로컬**: 챕터 폴더 안에서 열었다면 클론 없이 진행됩니다.''')]
 
 
+
+# ── Colab 배지 ────────────────────────────────────────────────────────────────
+# GitHub 에서 노트북을 열면 이 배지를 눌러 바로 Colab 으로 넘어갈 수 있다.
+COLAB_REPO   = "CONNECTS-SCV/bio-guides"
+GUIDE_PREFIX = "ab db/antibody_db_guide"          # 저장소 루트 기준 이 가이드의 경로
+
+def colab_badge_cell(rel_path):
+    url = f"https://colab.research.google.com/github/{COLAB_REPO}/blob/main/{GUIDE_PREFIX}/{rel_path}".replace(" ", "%20")
+    return {"cell_type": "markdown", "metadata": {},
+            "source": [f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({url})\n"]}
+
+
 def write_nb(path, cells):
+    cells = [colab_badge_cell(str(path.relative_to(ROOT)))] + cells
     nb = {"cells": cells,
           "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python",
                                       "name": "python3"},

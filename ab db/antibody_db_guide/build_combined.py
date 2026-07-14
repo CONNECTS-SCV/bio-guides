@@ -30,9 +30,21 @@ def strip_nav_footer(text):
     return re.sub(r"(?:\n[ \t]*---[ \t]*)?\n+[ \t]*다음 →[^\n]*\n*\Z", "\n", text)
 
 
-def qualify_images(text, folder):
-    """파일명만 참조하는 이미지 링크를 '챕터폴더/파일명' 으로 바꾼다."""
-    return IMG.sub(lambda m: f"{m.group(1)}{folder}/{m.group(2)}{m.group(3)}", text)
+def rewrite_links(text, folder):
+    """챕터 폴더 기준 상대경로(이미지 포함)를 통합본(루트) 기준으로 바꾼다.
+    안 바꾸면 ../02_.. 나 05_x.png 같은 링크가 combined.md 에서 전부 깨진다."""
+    import posixpath
+
+    def _norm(target):
+        if target.startswith(("http", "mailto:", "#", "/")):
+            return target
+        path, sep, anchor = target.partition("#")
+        if not path:
+            return target
+        return posixpath.normpath(posixpath.join(folder, path)) + (sep + anchor if sep else "")
+
+    return re.sub(r"(!?)\[([^\]]*)\]\(([^)\s]+)\)",
+                  lambda m: f"{m.group(1)}[{m.group(2)}]({_norm(m.group(3))})", text)
 
 
 def strip_hr(text):
@@ -57,7 +69,7 @@ def clean(path, folder=None):
     t = strip_nav_footer(strip_frontmatter(t))
     t = strip_hr(t).strip("\n")
     if folder:
-        t = qualify_images(t, folder)
+        t = rewrite_links(t, folder)
     return t
 
 

@@ -25,7 +25,26 @@ def strip_nav_footer(text):
 
 def clean(path):
     t = path.read_text(encoding="utf-8")
-    return strip_nav_footer(strip_frontmatter(t)).strip("\n")
+    t = strip_nav_footer(strip_frontmatter(t)).strip("\n")
+    folder = path.parent.name if path.parent != ROOT else ""
+    return rewrite_links(t, folder) if folder else t
+
+def rewrite_links(text, folder):
+    """챕터 폴더 기준 상대경로를 통합본(루트) 기준으로 바꾼다.
+    안 바꾸면 ../04_.. 나 05_x.png 같은 링크가 combined.md 에서 전부 깨진다."""
+    import posixpath
+
+    def _norm(target):
+        if target.startswith(("http", "mailto:", "#", "/")):
+            return target
+        path, sep, anchor = target.partition("#")
+        if not path:
+            return target
+        return posixpath.normpath(posixpath.join(folder, path)) + (sep + anchor if sep else "")
+
+    return re.sub(r"(!?)\[([^\]]*)\]\(([^)\s]+)\)",
+                  lambda m: f"{m.group(1)}[{m.group(2)}]({_norm(m.group(3))})", text)
+
 
 
 def chapter_files():
