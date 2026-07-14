@@ -1,0 +1,17 @@
+name: abseq
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pandas
+  - biopython
+  - matplotlib
+  - requests
+  - hmmer            # ANARCI가 subprocess로 부르는 hmmscan (pip 로는 안 옴)
+  - jupyter
+  - pip
+  - pip:
+      - anarci       # numbering (IMGT·Chothia·Kabat·Martin·AHo)
+      - abnumber     # ANARCI 래퍼 — CDR 정의·CDR grafting
+      - sapiens      # BioPhi의 humanness/humanization 언어모델 (BioPhi CLI 자체는 bioconda 전용)

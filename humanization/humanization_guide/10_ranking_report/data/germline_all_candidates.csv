@@ -1,0 +1,11 @@
+candidate,chain,v_gene,v_identity,j_gene,j_identity,hmm_species,chain_type
+anthroab,VH,IGHV1-8*01,0.74,IGHJ6*01,0.93,mouse,H
+anthroab,VL,IGLV2-11*01,0.86,IGLJ2*01,1.00,rhesus,L
+anthroabFRmasked,VH,IGHV1-2*02,0.80,IGHJ4*01,0.93,human,H
+anthroabFRmasked,VL,IGLV1-40*01,0.56,IGLJ2*01,0.92,rhesus,L
+humatch,VH,IGHV1-69*06,0.80,IGHJ6*01,0.86,mouse,H
+humatch,VL,IGLV1-40*01,0.82,IGLJ2*01,0.92,rhesus,L
+parental,VH,IGHV1-69*06,0.63,IGHJ6*01,0.86,mouse,H
+parental,VL,IGLV1-40*01,0.81,IGLJ2*01,0.83,rhesus,L
+sapiens,VH,IGHV1-8*01,0.80,IGHJ6*01,0.93,human,H
+sapiens,VL,IGLV1-40*01,0.87,IGLJ2*01,0.92,human,L

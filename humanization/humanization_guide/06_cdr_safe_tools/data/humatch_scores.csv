@@ -1,0 +1,13 @@
+metric,value
+HV_gene,hv1
+LV_gene,lv2
+CNN_H,0.972
+CNN_L,1.000
+CNN_P,0.971
+edit_total,20
+edit_VH,18
+edit_VL,2
+GL_target_score,0.4
+CNN_target_score,0.95
+allow_CDR_mutations,False
+CDR_mutations_observed,0

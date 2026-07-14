@@ -1,0 +1,16 @@
+name: abstruct
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10
+  - pandas
+  - biopython
+  - requests
+  - hmmer                     # IgFold의 do_renum=True 가 ANARCI numbering 을 부름
+  - pip
+  - pip:
+      - igfold
+      - transformers==4.36.2  # ← 고정 필수: 체크포인트에 pickle 된 옛 토크나이저 (Ch.03의 3.3)
+      - anarci
+      - abnumber

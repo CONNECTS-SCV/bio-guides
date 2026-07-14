@@ -1,0 +1,7 @@
+chain,definition,description,mean_probability
+VH,parental,"mean_self_prob (prob of parental's own residue, single pass)",0.693589856592007
+VH,definition_a_argmax_on_parental_matrix,"mean of max-prob per position from PARENTAL-context score matrix (= score of the one-shot argmax/humanized sequence, but WITHOUT re-running the model on it)",0.7822244942188263
+VH,definition_b_rescored_humanized,mean self-prob of humanized sequence's OWN residues after re-running sapiens.predict_scores on the humanized sequence itself,0.8152347428724169
+VL,parental,"mean_self_prob (prob of parental's own residue, single pass)",0.7698927667151365
+VL,definition_a_argmax_on_parental_matrix,mean of max-prob per position from PARENTAL-context score matrix,0.8506009525006956
+VL,definition_b_rescored_humanized,mean self-prob of humanized sequence's OWN residues after re-running sapiens.predict_scores on the humanized sequence itself,0.8717509208767263

@@ -1,0 +1,63 @@
+/* 미리보기용 — Toast UI 콘텐츠(.toastui-editor-contents)에 GitHub 스타일 적용. style_vars.css 와 같은 CSS 변수 사용. */
+:root{
+  --font-family: 'Noto Sans CJK KR','Noto Sans KR','Malgun Gothic',sans-serif;
+  --mono-family: 'Noto Sans Mono CJK KR','D2Coding','Consolas',monospace;
+  --body-size: 16px;
+  --line-height: 1.75;
+  --body-color: #24292e;
+  --heading-color: #1F3864;
+  --accent: #2E5496;
+  --link-color: #2E5496;
+  --th-bg: #2E5496;
+  --th-fg: #ffffff;
+  --cell-pad-v: 6px;
+  --cell-pad-h: 10px;
+  --cell-line-height: 1.5;
+  --table-font-size: .92em;
+  --table-width: auto;
+  --border-color: #d6dbe1;
+  --band-bg: #f1f5fb;
+  --img-width: 92%;
+  --img-margin: 1.1em auto;
+  --text-align: left;
+  --code-bg: #f6f8fa;
+  --code-fg: #24292e;
+  --inline-code-bg: #eef0f3;
+  --inline-code-fg: #b1361e;
+}
+.toastui-editor-contents{
+  font-family:var(--font-family); font-size:var(--body-size); line-height:var(--line-height);
+  color:var(--body-color); text-align:var(--text-align);
+}
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4{ font-weight:700; line-height:1.3; border:none; }
+.toastui-editor-contents h1{ font-size:1.85em; color:var(--heading-color); border-bottom:3px solid var(--accent); padding-bottom:.25em; margin:.2em 0 .7em; }
+.toastui-editor-contents h2{ font-size:1.42em; color:var(--heading-color); border-bottom:1px solid #d8dee4; padding-bottom:.2em; margin:1.5em 0 .5em; }
+.toastui-editor-contents h3{ font-size:1.18em; color:var(--accent); margin:1.1em 0 .4em; }
+.toastui-editor-contents h4{ font-size:1.04em; color:var(--accent); margin:1em 0 .3em; }
+.toastui-editor-contents p{ margin:.5em 0; }
+.toastui-editor-contents strong{ color:#111; font-weight:700; }
+.toastui-editor-contents a{ color:var(--link-color); text-decoration:none; }
+.toastui-editor-contents em{ color:#444; }
+.toastui-editor-contents div[style] strong, .toastui-editor-contents div[style] em{ color:inherit; }
+.toastui-editor-contents hr{ border:none; border-top:1px solid #d8dee4; margin:1.6em 0; }
+.toastui-editor-contents code{ font-family:var(--mono-family); background:var(--inline-code-bg); color:var(--inline-code-fg); padding:.1em .35em; border-radius:4px; font-size:.87em; }
+.toastui-editor-contents pre{ background:var(--code-bg); border:1px solid #e1e4e8; border-radius:6px; padding:12px 14px; line-height:1.5; margin:.9em 0; }
+.toastui-editor-contents pre code{ background:none; color:var(--code-fg); padding:0; font-size:.9em; }
+.toastui-editor-contents table{ border-collapse:collapse; width:var(--table-width); margin:1em 0; font-size:var(--table-font-size); }
+.toastui-editor-contents table th{ background:var(--th-bg); color:var(--th-fg); font-weight:700; border:1px solid var(--border-color); padding:var(--cell-pad-v) var(--cell-pad-h); line-height:var(--cell-line-height); }
+.toastui-editor-contents table td{ border:1px solid var(--border-color); padding:var(--cell-pad-v) var(--cell-pad-h); line-height:var(--cell-line-height); vertical-align:top; }
+.toastui-editor-contents table tr:nth-child(even) td{ background:var(--band-bg); }
+.toastui-editor-contents blockquote{ border-left:4px solid var(--accent); background:#eef3fa; padding:.55em 1em; margin:1em 0; border-radius:0 5px 5px 0; color:#2a2a2a; }
+.toastui-editor-contents blockquote p{ margin:.3em 0; }
+.toastui-editor-contents img{ max-width:var(--img-width); height:auto; display:block; margin:var(--img-margin); }
+.toastui-editor-contents img.katex-rendered{ display:inline; margin:0; }
+.toastui-editor-contents ul,
+.toastui-editor-contents ol{ padding-left:1.4em; margin:.5em 0; }
+.toastui-editor-contents li{ margin:.18em 0; }
+/* 정렬 div (툴바 '정렬' 버튼이 삽입) */
+.toastui-editor-contents div[align="center"], .toastui-editor-contents div[style*="center"]{ text-align:center; }
+.toastui-editor-contents div[align="center"] img{ margin-left:auto; margin-right:auto; }
+.katex{ font-size:1.05em; }

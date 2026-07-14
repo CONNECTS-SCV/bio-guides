@@ -1,0 +1,4 @@
+id,length,molecular_weight,pI,gravy,cysteine_count,odd_cysteine_flag,methionine_count,tryptophan_count,ambiguous_residues,N_glycosylation_NXS_T,deamidation_NG,deamidation_NS,isomerization_DG
+demo_HC,120,13338.61,5.02,-0.45,2,NO,1,4,,,,,
+demo_LC,107,11460.64,8.64,-0.288,2,NO,1,1,,,,,
+

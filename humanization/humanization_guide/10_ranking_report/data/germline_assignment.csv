@@ -1,0 +1,5 @@
+chain,gene_type,gene,identity_pct,identity_fraction,tool,note
+H,V,IGHV1-69*06,63.27,0.6326530612244898,ANARCI 1.3 --assign_germline --use_species human,matches guide (IGHV1-69*06 63%)
+H,J,IGHJ6*01,85.71,0.8571428571428571,ANARCI 1.3 --assign_germline --use_species human,"guide claims IGHJ4*01 86%; exact tie at 85.71% between IGHJ6*01 and IGHJ4*01 over the 14-residue J-segment (12/14 matches each) -- ANARCI's dict iteration order picks IGHJ6*01 first, abnumber 0.3.2's germline lookup (separate reference set) picks IGHJ4*01 for the same sequence. Both are valid, tied, tool/tie-break dependent."
+L,V,IGLV1-40*01,80.85,0.8085106382978723,ANARCI 1.3 --assign_germline --use_species human,matches guide exactly (IGLV1-40*01 81%)
+L,J,IGLJ2*01,83.33,0.8333333333333334,ANARCI 1.3 --assign_germline --use_species human,matches guide exactly (IGLJ2*01 83%)

@@ -1,0 +1,10 @@
+tool,version,install,note
+ANARCI,1.3,apt hmmer + pip anarci (또는 conda -c bioconda anarci hmmer),hmmscan 이 PATH 에 없으면 numbering 이 FileNotFoundError 로 죽습니다
+abnumber,0.3.2,pip abnumber,ANARCI 를 파이썬에서 감싸는 래퍼 (CDR/region 추출)
+sapiens,1.1.0,pip sapiens,모델 가중치는 첫 실행 때 HuggingFace 에서 자동 다운로드
+Humatch,1.0.1,pip humatch (실패 시 GitHub source),CNN 가중치는 첫 실행 때 Zenodo 에서 자동 다운로드
+anthroab,1.1.0,pip anthroab,RoBERTa-base 체크포인트 자동 다운로드 (VH/VL 각각)
+abnativ,2.0.8,pip abnativ,체크포인트를 따로 받아야 함 (abnativ init)
+igfold,0.4.0,pip igfold,AntiBERTy 포함; do_refine 은 PyRosetta 필요
+transformers,5.13.1,pip transformers,Ab-RoBERTa (mogam-ai/Ab-RoBERTa) 로드용
+torch,2.6.0,pip torch==2.6.0,torch 2.13.0+cpu 휠은 import 시 undefined symbol 로 깨집니다

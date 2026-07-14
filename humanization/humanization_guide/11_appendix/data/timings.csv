@@ -1,0 +1,23 @@
+tool,step,wall_clock_seconds,note
+ANARCI,numbering+germline (H+L together via CLI),0.153,"real time of `ANARCI -i parental.fasta -s imgt --csv --assign_germline --use_species human`; env=biophi"
+abnumber,CDR extraction + germline lookup (H+L),~1,"not separately instrumented, sub-second per chain; env=biophi"
+Sapiens,predict_scores VH (parental),0.931,env=biophi (sapiens 1.1.0)
+Sapiens,predict_scores VL (parental),0.529,env=biophi
+Sapiens,predict_scores VH (re-score humanized seq -- definition b),0.0085,"cached model, tiny marginal cost after first call; env=biophi"
+Sapiens,predict_scores VL (re-score humanized seq -- definition b),0.0042,env=biophi
+Humatch,Humatch-humanise CLI (VH+VL joint humanisation),160.224,"includes first-run Zenodo weight download (3 CNNs + 24 germline-likeness arrays); env=hz_tools"
+AnthroAb,predict_best_score VH (full argmax),1.505,"includes first-call HF checkpoint load; env=hz_tools"
+AnthroAb,predict_best_score VL (full argmax),1.253,env=hz_tools
+AnthroAb,predict_masked FR-only (fixed workaround) VH,2.534,env=hz_tools
+AnthroAb,predict_masked FR-only (fixed workaround) VL,2.325,env=hz_tools
+AbRoBERTa,pseudo-likelihood scoring -- 5 variants x (VH+VL paired) = 10 chain scans,69.941,"single script run covering parental/sapiens/humatch/anthroab/anthroab-FRmasked; env=hz_tools; ~7s/chain average"
+IgFold,model load (4-model ensemble + AntiBERTy) -- parental run,0.234,"env=abstruct, CPU (CUDA driver 12040 too old for torch+cu130 build), OMP_NUM_THREADS=4"
+IgFold,fold parental VH+VL,7.086,env=abstruct CPU
+IgFold,model load -- sapiens_humanized run,0.503,"separate process, models reloaded from disk each run"
+IgFold,fold sapiens_humanized VH+VL,11.988,env=abstruct CPU
+IgFold,CDR-H3 RMSD alignment calc (Biopython Superimposer),<1,env=abstruct
+AbNativ,checkpoint download (one-time setup: the 4 ckpts actually needed -- vh/vlambda/vh2/vl2),2006,"13:49:43 -> 14:23:09 wall. `abnativ init` downloads all 9 ckpts SEQUENTIALLY from Zenodo (~6GB, very slow); we stopped it after 3 and wget -c'd the 4 needed ones in PARALLEL. A plain `abnativ init` would take considerably longer. AbNatiV1 ckpts ~194MB each, AbNatiV2 ckpts ~1.09GB each. env=hz_tools"
+AbNativ,score -nat VH (AbNatiV1) -- 4 VH variants,3.51,"includes ANARCI alignment of 4 seqs; CPU; env=hz_tools"
+AbNativ,score -nat VLambda (AbNatiV1) -- 4 VL variants,6.62,CPU; env=hz_tools
+AbNativ,score -nat VH2 (AbNatiV2) -- 4 VH variants,3.94,CPU; env=hz_tools
+AbNativ,score -nat VL2 (AbNatiV2) -- 4 VL variants,4.35,CPU; env=hz_tools

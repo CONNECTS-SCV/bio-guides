@@ -1,0 +1,51 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1784003856.366347  324757 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1784003857.594399  324757 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+Config:
+                            Value
+max_edit                       60
+noise                        0.01
+num_cpus                       16
+GL_target_score_H             0.4
+GL_allow_CDR_mutations_H    False
+GL_fixed_imgt_positions_H      []
+CNN_target_score_H           0.95
+CNN_allow_CDR_mutations_H   False
+CNN_fixed_imgt_positions_H     []
+GL_target_score_L             0.4
+GL_allow_CDR_mutations_L    False
+GL_fixed_imgt_positions_L      []
+CNN_target_score_L           0.95
+CNN_allow_CDR_mutations_L   False
+CNN_fixed_imgt_positions_L     []
+CNN_target_score_P           0.95
+
+Aligning sequences
+Loading CNNs
+Downloading heavy model weights from https://zenodo.org/records/13764771/files/heavy.weights.h5?download=1... done
+Downloading light model weights from https://zenodo.org/records/13764771/files/light.weights.h5?download=1... done
+Downloading paired model weights from https://zenodo.org/records/13764771/files/paired.weights.h5?download=1... done
+Humanising 1 sequences
+
+Humanising sequence 1/1
+Matching germline likeness for hv1 and lv2
+Downloading germline lookup arrays for all V-genes from https://zenodo.org/records/13764771... done
+Designing and scoring single-point variants
+	It. #1	CNN-H: 0.08,	CNN-L: 1.00,	CNN-P: 0.83,	Edit: 13
+	It. #2	CNN-H: 0.25,	CNN-L: 1.00,	CNN-P: 0.76,	Edit: 14
+	It. #3	CNN-H: 0.50,	CNN-L: 1.00,	CNN-P: 0.74,	Edit: 15
+	It. #4	CNN-H: 0.71,	CNN-L: 1.00,	CNN-P: 0.74,	Edit: 16
+	It. #5	CNN-H: 0.70,	CNN-L: 1.00,	CNN-P: 0.97,	Edit: 17
+	It. #6	CNN-H: 0.86,	CNN-L: 1.00,	CNN-P: 0.96,	Edit: 18
+	It. #7	CNN-H: 0.94,	CNN-L: 1.00,	CNN-P: 0.96,	Edit: 19
+Humanised sequences:
+	QVQLVQSGAEVVKPGASVKVSCKASGYTFTDYVINWVKIAPGQGLEWMGEIYPGSGTNYYAQKFKGRVTLTADKSSNTAYMELSSLTSEDTAVYYCARRGRYGLYAMDYWGQGTSVTVSS
+	QSALTQPPSASGSPGQSVTISCTGTSSDVGHKFPVSWYQQYPGKAPKLLIYKNLLRPSGVPDRFSGSKSGTSASLAITGLQAEDEADYYCQSYDSSLRVVFGGGTKTTVL
+	Edit:	20
+	HV:	hv1
+	LV:	lv2
+	CNN_H:	0.972
+	CNN_L:	1.000
+	CNN_P:	0.971

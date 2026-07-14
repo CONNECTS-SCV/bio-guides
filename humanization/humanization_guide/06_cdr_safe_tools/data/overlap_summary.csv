@@ -1,0 +1,7 @@
+comparison,chain_scope,n_positions,note
+Sapiens x AnthroAb_best_score,VL only,10,REPRODUCES guide's 'AnthroAb x Sapiens overlap = 10 positions' claim exactly (guide's number matches VL-chain-only overlap under AnthroAb full-argmax mode)
+Sapiens x AnthroAb_best_score,VH only,12,
+Sapiens x AnthroAb_best_score,VH+VL combined,22,
+Sapiens x AnthroAb_masked_FRonly,VL only,9,does not reproduce 10 (different AnthroAb mode)
+Sapiens x AnthroAb_masked_FRonly,VH only,16,
+Sapiens x AnthroAb_masked_FRonly,VH+VL combined,25,

@@ -1,0 +1,14 @@
+name: abinterface
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.9
+  - pandas
+  - biopython
+  - freesasa
+  - mdanalysis
+  - openbabel
+  - pip
+  - pip:
+      - plip

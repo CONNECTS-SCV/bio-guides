@@ -1,0 +1,18 @@
+Chains: A, H, L, N
+Residue contacts within 4.0 Å
+ASN H:54	ASN N:400	atom_contacts=1
+ASN H:54	THR N:401	atom_contacts=5
+ASN H:54	TRP N:403	atom_contacts=3
+ASP H:100B	ASN N:329	atom_contacts=1
+ASP H:56	LYS N:432	atom_contacts=3
+ASP H:56	SER N:370	atom_contacts=5
+ASP H:56	TRP N:403	atom_contacts=4
+THR H:57	LYS N:432	atom_contacts=1
+TYR H:100A	ALA N:369	atom_contacts=3
+TYR H:100A	ASN N:329	atom_contacts=1
+TYR H:100A	ILE N:368	atom_contacts=2
+TYR H:52	ASN N:400	atom_contacts=2
+TYR H:52	THR N:401	atom_contacts=1
+TYR H:99	ASN N:400	atom_contacts=6
+TYR H:99	ILE N:366	atom_contacts=1
+

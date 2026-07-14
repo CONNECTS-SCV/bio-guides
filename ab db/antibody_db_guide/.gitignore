@@ -1,0 +1,4 @@
+# 학습자가 노트북을 돌리면 생기는 산출물 폴더 (커밋하지 않아요 — data/ 가 레퍼런스)
+my_run/
+.ipynb_checkpoints/
+__pycache__/

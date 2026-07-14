@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 학습자가 직접 만든 실행 결과 / 노트북이 클론하는 도구 소스
+my_run/
+.boltzgen_src/
+
+# 로컬 백업(통합 전 히스토리)
+_archive/
+
+# 편집·렌더 백업 산출물
+*.bak

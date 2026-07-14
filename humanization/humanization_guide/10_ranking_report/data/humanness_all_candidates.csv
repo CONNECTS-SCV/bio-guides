@@ -1,0 +1,16 @@
+candidate,chain,mean_self_prob,n_residues,definition,seconds
+anthroab,VH,0.778175,120,b_rescored_self_prob,0.004
+anthroab,VL,0.811236,111,b_rescored_self_prob,0.007
+anthroab,paired,0.794061,231,b_rescored_self_prob,
+anthroabFRmasked,VH,0.758949,120,b_rescored_self_prob,0.004
+anthroabFRmasked,VL,0.664574,111,b_rescored_self_prob,0.004
+anthroabFRmasked,paired,0.7136,231,b_rescored_self_prob,
+humatch,VH,0.765152,120,b_rescored_self_prob,0.004
+humatch,VL,0.835552,110,b_rescored_self_prob,0.004
+humatch,paired,0.798822,230,b_rescored_self_prob,
+parental,VH,0.69359,120,b_rescored_self_prob,1.407
+parental,VL,0.769893,111,b_rescored_self_prob,0.498
+parental,paired,0.730255,231,b_rescored_self_prob,
+sapiens,VH,0.815235,120,b_rescored_self_prob,0.008
+sapiens,VL,0.871751,111,b_rescored_self_prob,0.004
+sapiens,paired,0.842392,231,b_rescored_self_prob,

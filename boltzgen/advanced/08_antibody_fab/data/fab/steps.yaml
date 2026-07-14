@@ -1,0 +1,5 @@
+steps:
+- name: analysis
+  config_file: config/analysis.yaml
+- name: filtering
+  config_file: config/filtering.yaml

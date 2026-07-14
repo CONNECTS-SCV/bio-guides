@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 편집/렌더 백업 산출물
+*.bak
