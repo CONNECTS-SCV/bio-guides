@@ -41,7 +41,7 @@ language: ko
 
 ### TM-score와 pTM
 
-먼저 **TM-score**(Template Modeling score)를 알아야 해요. 두 구조가 얼마나 비슷한지를 0~1로 재는 지표인데, 이렇게 정의돼요:
+먼저 **TM-score**(Template Modeling score)를 알아야 해요. 두 구조가 얼마나 비슷한지를 0~1로 재는 지표인데, 이렇게 정의돼요.
 
 $$
 \text{TM} = \frac{1}{L}\sum_{i=1}^{L}\frac{1}{1+\left(d_i/d_0(L)\right)^2}, \qquad d_0(L)=1.24\sqrt[3]{L-15}-1.8
@@ -49,7 +49,7 @@ $$
 
 여기서 $d_i$는 정렬된 $i$번째 잔기 쌍의 거리, $L$은 길이예요. 핵심은 **분모에 길이 보정 $d_0$이 들어가서, RMSD와 달리 길이에 덜 휘둘린다**는 점이에요. 그래서 단백질 비교의 표준 지표로 쓰여요. TM ≥ 0.5면 "같은 fold"로 봐요.
 
-**pTM**(predicted TM-score)은 모델이 *스스로 예측한* TM-score예요. 즉 "내가 예측한 이 구조가 실제 구조와 TM 얼마쯤 될 것 같다"는 자기 신뢰도죠. BoltzGen에서:
+**pTM**(predicted TM-score)은 모델이 *스스로 예측한* TM-score예요. 즉 "내가 예측한 이 구조가 실제 구조와 TM 얼마쯤 될 것 같다"는 자기 신뢰도죠. BoltzGen에서.
 
 - **`design_ptm`** = 설계 단백질 자체의 구조 신뢰도. 높을수록 좋음. **0.7 이상이면 양호, 0.8 이상이면 우수**.
 
@@ -84,7 +84,7 @@ $$
 
 ### RMSD — 자기일관성의 핵심
 
-Ch.01의 "자기일관성" 기억하시죠? 그걸 숫자로 재는 게 RMSD예요. **설계한 백본 구조**와 **Boltz-2가 서열로부터 다시 예측한 구조**가 얼마나 다른지를 Å로 재요:
+Ch.01의 "자기일관성" 기억하시죠? 그걸 숫자로 재는 게 RMSD예요. **설계한 백본 구조**와 **Boltz-2가 서열로부터 다시 예측한 구조**가 얼마나 다른지를 Å로 재요.
 
 $$
 \text{RMSD} = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\lVert \mathbf{x}_i^{\text{design}}-\mathbf{x}_i^{\text{refold}}\rVert^2}
@@ -152,7 +152,7 @@ $$
 
 가장 자주 받는 질문이에요. "왜 pTM 1등이 최종 1등이 아니죠?"
 
-BoltzGen은 **한 메트릭으로 줄세우지 않아요.** 여러 메트릭을 각각 순위화한 뒤(컬럼 `rank_*`) 종합해요:
+BoltzGen은 **한 메트릭으로 줄세우지 않아요.** 여러 메트릭을 각각 순위화한 뒤(컬럼 `rank_*`) 종합해요.
 
 ```
 rank_design_to_target_iptm      (ipTM)
@@ -169,7 +169,7 @@ rank_delta_sasa_refolded        (ΔSASA)
 
 ### 다양성 선택 — lazy-greedy
 
-`budget`개를 최종 선별할 때는 품질만이 아니라 다양성도 봐요. 목적함수는 대략 이래요:
+`budget`개를 최종 선별할 때는 품질만이 아니라 다양성도 봐요. 목적함수는 대략 이래요.
 
 $$
 \text{score}(d) = (1-\alpha)\cdot \text{quality}(d) + \alpha\cdot \big(1 - \max_{s\in S}\text{sim}(d, s)\big)
@@ -183,14 +183,14 @@ $$
 
 ## 5.9 공식 도구 — `filter.ipynb`
 
-BoltzGen 레포에는 `filter.ipynb`라는 **공식 필터링·시각화 노트북**이 들어 있어요. 분석까지 끝난 결과에서:
+BoltzGen 레포에는 `filter.ipynb`라는 **공식 필터링·시각화 노트북**이 들어 있어요. 분석까지 끝난 결과에서.
 
 1. **하드 필터** 적용 (예: RMSD < 2.5)
 2. **품질 순위** 계산 (메트릭별 가중치 `metrics_override`)
 3. **다양성 선택** (lazy-greedy, `alpha`)
 4. **시각화** — `results_overview.pdf`(표·히스토그램·산점도·서열 로고·liability 히트맵)
 
-핵심 파라미터:
+핵심 파라미터.
 
 ```python
 Filter(
@@ -209,11 +209,11 @@ Filter(
 
 ## 5.10 시각화 — 한눈에 보기 (실측 그래프)
 
-수십 개 메트릭을 표로만 보면 감이 안 와요. 그래서 우리는 `../boltzgen_viz.py` 모듈로 **핵심 4지표를 2×2 그래프**로 그려요. 아래는 실제 vanilla 단백질 설계(10개 최종 디자인)의 메트릭 개요예요:
+수십 개 메트릭을 표로만 보면 감이 안 와요. 그래서 우리는 `../boltzgen_viz.py` 모듈로 **핵심 4지표를 2×2 그래프**로 그려요. 아래는 실제 vanilla 단백질 설계(10개 최종 디자인)의 메트릭 개요예요.
 
 ![Vanilla 단백질 메트릭 개요](05_vanilla_metrics.png)
 
-이 그림을 읽는 법:
+이 그림을 읽는 법.
 
 - **좌상(pTM)**: 10개 모두 0.7 임계선 위 → 구조 신뢰도 전반 양호. rank 3이 0.828로 최고.
 - **우상(ipTM)**: 0.44~0.66 분포. rank 5·6·8·9·10이 0.6 이상으로 인터페이스가 가장 믿음직해요(최고는 rank 6의 0.663). (흥미롭게도 pTM 최고인 rank 3은 ipTM이 0.44로 낮아요 — 이래서 한 지표만 보면 안 돼요!)

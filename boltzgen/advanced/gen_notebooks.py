@@ -489,7 +489,7 @@ print("    ... 총", len(cifs), "개")
 print("\\n· 메트릭 CSV:")
 for f in sorted(base.glob("*metrics*.csv")):
     print(f"    {f.name:38s} ({f.stat().st_size} bytes)")"""),
-md("""꼭 기억할 점(본문 4.6):
+md("""꼭 기억할 점(본문 4.6).
 - 최종 디자인 = `final_ranked_designs/final_<budget>_designs/rankN_<name>_K.cif`
   (폴더가 아니라 **순위 붙은 단일 CIF**, 서열·구조 내장. `budget=2` 로 돌렸으면 `final_2_designs/`)
 - 메트릭 = `final_designs_metrics_<budget>.csv`(최종셋) + `all_designs_metrics.csv`(전체), 한 디자인 = 한 행
@@ -547,7 +547,7 @@ for name in ["aggregate_metrics_analyze.csv", "per_target_metrics_analyze.csv"]:
         print(name, "건너뜀:", e)"""),
 md("""## 5) 해석 요점 (본문 5.8~5.10) — 내 결과의 실제 수치로
 
-읽는 원칙(어느 결과에나 적용):
+읽는 원칙(어느 결과에나 적용).
 
 - **ipTM**(`design_to_target_iptm`)이 결합의 핵심 지표 — 가장 높은 것부터 후보로 봄.
 - **RMSD**(`filter_rmsd`)는 자기일관성 — 낮을수록 "설계한 모양이 서열로 재현"됨.

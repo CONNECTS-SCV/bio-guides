@@ -109,9 +109,9 @@ conda activate abstruct
 python -c "import igfold, torch; print('igfold OK, CUDA:', torch.cuda.is_available())"
 ```
 
-> **주의** — **IgFold 설치에서 실제로 겪은 함정 셋** (전부 회피책이 코드에 들어 있어요):
+> **주의** — **IgFold 설치에서 실제로 겪은 함정 셋** (전부 회피책이 코드에 들어 있어요).
 > 1. **torch ≥ 2.6의 `weights_only=True`** 기본값 → IgFold 체크포인트 로드가 막혀요. → `torch.load`를 `weights_only=False`로 감싸면 됩니다(신뢰된 패키지 가중치).
-> 2. **transformers 5.x 비호환.** 체크포인트에 **옛 토크나이저 객체가 pickle 돼 있어서**, 클래스가 옮겨지거나 사라지면 unpickle이 실패해요. 실제로 이렇게 죽습니다:
+> 2. **transformers 5.x 비호환.** 체크포인트에 **옛 토크나이저 객체가 pickle 돼 있어서**, 클래스가 옮겨지거나 사라지면 unpickle이 실패해요. 실제로 이렇게 죽습니다.
 >    ```
 >    AttributeError: module 'transformers.tokenization_utils_sentencepiece' has no attribute 'Trie'
 >    AttributeError: module 'transformers.models.bert.tokenization_bert' has no attribute 'BasicTokenizer'

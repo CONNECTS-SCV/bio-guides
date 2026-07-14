@@ -94,7 +94,7 @@ Sapiens가 만든 humanized 서열을 원본과 비교했어요.
 
 humanness만 보고 무작정 바꾸면 항원 결합을 잃을 수 있어요. Ch.01에서 본 **Vernier zone / CDR-supporting residue** 때문이에요.
 
-실전 humanization workflow:
+실전 humanization workflow.
 
 1. ANARCI로 CDR/FR 정의 (Ch.04)
 2. IgBLAST/IMGT로 closest human germline 탐색
@@ -105,7 +105,7 @@ humanness만 보고 무작정 바꾸면 항원 결합을 잃을 수 있어요. C
 7. 원본·humanized 구조예측 후 CDR RMSD·paratope geometry 비교 (Ch.06)
 8. humanness·developability 재평가 (Ch.08)
 
-humanization mutation table 예 (Chothia numbering 기준 — §scheme 명시):
+humanization mutation table 예 (Chothia numbering 기준 — §scheme 명시).
 
 | Position | Region | Original | Humanized | 근거 | Back-mutation |
 |----------|--------|----------|-----------|------|---------------|

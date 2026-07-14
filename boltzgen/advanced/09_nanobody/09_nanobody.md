@@ -108,7 +108,7 @@ reset_res_index:
 
 ## 9.5 Framework 보존 확인 — 정상 그래프팅의 증거
 
-나노바디(VHH)의 framework는 매우 보존적이에요. 실제 우리 실측에서 rank 1 서열이 이렇게 시작했어요:
+나노바디(VHH)의 framework는 매우 보존적이에요. 실제 우리 실측에서 rank 1 서열이 이렇게 시작했어요.
 
 ```
 EVQLVESGGGLVQPGGSLRLSCAAS... (framework, 거의 고정)
@@ -127,13 +127,13 @@ EVQLVESGGGLVQPGGSLRLSCAAS... (framework, 거의 고정)
 
 ![Nanobody 메트릭 개요](09_nanobody_metrics.png)
 
-1위 디자인의 복합체 구조예요:
+1위 디자인의 복합체 구조예요.
 
 ![Nanobody–penguinpox 구조](09_nanobody_structure.png)
 
 *설계한 나노바디(금색, 단일 VHH 도메인)가 penguinpox 타깃(파랑 표면)에 결합한 모습. 항체 Fab보다 훨씬 작은 단일 도메인으로 결합하는 게 보여요.*
 
-최종 선별셋의 실제 수치(상위 5개):
+최종 선별셋의 실제 수치(상위 5개).
 
 | rank | id | pTM | ipTM | RMSD(Å) | H-bond | CDR영역(aa) |
 |------|----|-----|------|---------|--------|-------------|
@@ -143,7 +143,7 @@ EVQLVESGGGLVQPGGSLRLSCAAS... (framework, 거의 고정)
 | 4 | penguinpox_15 | 0.761 | 0.200 | 21.11 | 2 | 31 |
 | 5 | penguinpox_14 | 0.754 | 0.193 | 23.02 | 4 | 44 |
 
-읽는 법과 솔직한 해석:
+읽는 법과 솔직한 해석.
 
 - **pTM**: 10개 모두 0.74~0.79로 양호해요. scaffold 기반이라 **나노바디 골격 구조는 안정적으로 예측**됐다는 뜻이에요.
 - **ipTM**: rank 1이 0.252로 최고이고, 나머지는 0.14~0.23이에요. **rank 1이 ipTM도 1위 → 최종 1위**로 이어졌어요(순위는 ipTM·pTM·PAE 종합이지만, ipTM이 특히 크게 작용).
@@ -156,7 +156,7 @@ EVQLVESGGGLVQPGGSLRLSCAAS... (framework, 거의 고정)
 
 ## 9.7 실험으로 가는 길
 
-나노바디는 작아서 **대장균에서 손쉽게 발현·정제**돼요(항체보다 훨씬 저렴·빠름). 상위 후보를:
+나노바디는 작아서 **대장균에서 손쉽게 발현·정제**돼요(항체보다 훨씬 저렴·빠름). 상위 후보를.
 
 1. 대장균 발현 → His-tag 정제 (수일)
 2. SPR/BLI로 결합 친화도 측정

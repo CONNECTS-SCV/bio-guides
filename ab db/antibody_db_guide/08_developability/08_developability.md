@@ -49,7 +49,7 @@ python scripts/liability_scan.py data/demo_mab.fa --out my_run/liability.csv
 
 **그림 읽는 법** — 좌상 pI 패널에서 중쇄(5.02)는 pH 7 기준선 아래(산성), 경쇄(8.64)는 위(염기성)로 갈려요 — 사슬 간 전하가 반대라 charge symmetry는 TAP로 따로 봐야 한다는 신호예요. 우상 GRAVY는 둘 다 0 아래(음수)라 평균적으로 친수성 → 용해도 측면 무난. 좌하 Cys 패널은 둘 다 정확히 2개(짝수)라 **unpaired cysteine 위험 없음**. 가장 중요한 건 우하 패널인데, **막대가 아예 비어 있어요** — deamidation·isomerization·N-glyc sequon이 0건이라는 뜻으로, 이 데모 항체는 **서열 liability가 깨끗**합니다. 만약 우하에 막대가 솟아 있고 그 위치가 CDR이라면, 결합력이 좋아도 임상 후보로는 위험 신호예요.
 
-해석 포인트:
+해석 포인트.
 
 - **Cys 2개(짝수)** — 양쪽 다 도메인 내 disulfide가 짝이 맞아요. **unpaired cysteine 위험 없음**(홀수면 mispairing·응집 경고).
 - **deamidation(N-G/N-S)·isomerization(D-G)·N-glyc sequon이 0건** — 이 데모 항체는 서열 liability가 깨끗한 편이에요.
@@ -62,7 +62,7 @@ python scripts/liability_scan.py data/demo_mab.fa --out my_run/liability.csv
 
 ## 8.3 TAP — 임상 기준 developability 프로파일
 
-OPIG의 **TAP(Therapeutic Antibody Profiler)**는 variable domain 서열을 받아 ABodyBuilder2로 구조를 만들고, **임상 단계 항체 분포와 비교**해요.[23] TAP가 보는 5개 축:
+OPIG의 **TAP(Therapeutic Antibody Profiler)**는 variable domain 서열을 받아 ABodyBuilder2로 구조를 만들고, **임상 단계 항체 분포와 비교**해요.[23] TAP가 보는 5개 축.
 
 - CDR length
 - Surface hydrophobicity (PSH)

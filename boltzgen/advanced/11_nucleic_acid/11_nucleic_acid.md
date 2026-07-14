@@ -96,7 +96,7 @@ entities:
         - chain: { id: A1 }
 ```
 
-각 기능의 역할:
+각 기능의 역할.
 
 | 기능 | 무엇을 하나 | 왜 |
 |------|------------|----|
@@ -108,7 +108,7 @@ entities:
 
 > 심화 — `not_design`에 들어간 잔기들이 핵심이에요. zinc finger는 `Cys-X2-Cys-X12-His-X3-His` 패턴으로 Zn²⁺을 붙잡는데, **이 4개 잔기 중 하나라도 바뀌면 Zn이 안 붙고 구조가 무너져요.** 그래서 이들을 `not_design`으로 못박는 거예요. 효소의 catalytic triad, 이황화 Cys, 금속 결합 부위 등 "기능에 필수인 잔기"는 항상 이렇게 고정해야 해요.
 
-실행:
+실행.
 
 ```bash
 boltzgen run example/denovo_zinc_finger_against_dna/zinc_finger.yaml \
@@ -126,13 +126,13 @@ boltzgen run example/denovo_zinc_finger_against_dna/zinc_finger.yaml \
 
 ![DNA 결합 메트릭 개요](11_dna_metrics.png)
 
-1위 디자인의 복합체 구조예요:
+1위 디자인의 복합체 구조예요.
 
 ![Zinc finger–DNA 구조](11_dna_structure.png)
 
 *설계한 단백질(금색)이 DNA 이중나선(파랑)의 groove를 따라 결합한 모습. 회색 구는 Zn 이온, 빨간 점선은 다수의 수소결합이에요. 단백질이 DNA를 휘감듯 따라가는 게 보이죠 — 평균 H-bond 30.8개가 이렇게 만들어져요.*
 
-최종 선별셋의 실제 수치(상위 5개):
+최종 선별셋의 실제 수치(상위 5개).
 
 | rank | id | pTM | ipTM | RMSD(Å) | H-bond | 길이(aa) |
 |------|----|-----|------|---------|--------|----------|
@@ -142,7 +142,7 @@ boltzgen run example/denovo_zinc_finger_against_dna/zinc_finger.yaml \
 | 4 | zinc_finger_14 | 0.516 | 0.561 | 2.20 | 27 | 100 |
 | 5 | zinc_finger_08 | 0.511 | 0.557 | 2.06 | 20 | 101 |
 
-이 결과가 DNA 결합의 특성을 교과서처럼 보여줘요:
+이 결과가 DNA 결합의 특성을 교과서처럼 보여줘요.
 
 - **H-bond가 압도적으로 많아요 (20~42개, 최종 10개 전체 평균 30.8개!)**. 단백질-단백질 결합이 보통 한 자릿수인 것과 비교하면 차원이 달라요. 이게 바로 11.2에서 말한 DNA **인산 골격**과의 광범위한 수소결합·정전기 상호작용이에요. 양전하 잔기(Arg/Lys)가 음전하 인산을 따라 줄줄이 결합하는 거죠.
 - **ipTM이 높아요 (최종 10개 0.50~0.67)**. 나노바디(Ch.09, 0.2대)나 항체(Ch.08, 0.4대)보다 높은데, DNA의 강한 음전하가 안정적인 정전기 결합을 만들기 때문이에요. 소규모(num_designs 30)인데도 이만큼 나온 건 DNA 타깃이 "결합하기 유리한" 표면이라는 뜻이에요. (위 표의 상위 5개만 보면 0.50~0.59예요.)
@@ -157,11 +157,11 @@ boltzgen run example/denovo_zinc_finger_against_dna/zinc_finger.yaml \
 
 DNA를 했으니 RNA도 해볼까요? 방법은 **완전히 동일**해요 — RNA가 들어 있는 CIF만 있으면 BoltzGen이 자동으로 RNA로 인식해요.
 
-RNA는 DNA와 몇 가지가 달라요:
+RNA는 DNA와 몇 가지가 달라요.
 - 단일 가닥(single-strand)인 경우가 많고, 복잡한 2차/3차 구조(헤어핀, 루프, pseudoknot)를 가져요.
 - 그래서 결합 부위가 더 다양하고, 구조 의존적이에요.
 
-RNA 타깃 준비(노트북 `11_nucleic_lab.ipynb`에서 실습):
+RNA 타깃 준비(노트북 `11_nucleic_lab.ipynb`에서 실습).
 
 ```python
 # 1) RNA-단백질 복합체 구조를 받아 RNA 체인을 타깃으로 추출
@@ -190,13 +190,13 @@ boltzgen run rna_spec.yaml --output workbench/rna \
 
 ![RNA 결합 메트릭 개요](11_rna_metrics.png)
 
-1위 디자인의 복합체 구조예요:
+1위 디자인의 복합체 구조예요.
 
 ![단백질–RNA 구조](11_rna_structure.png)
 
 *설계한 단백질(금색)이 RNA 헤어핀(파랑)에 결합한 모습. DNA 이중나선과 달리 단일가닥 RNA가 접힌 형태에 결합하는 게 보여요.*
 
-최종 선별셋의 실제 수치(상위 5개):
+최종 선별셋의 실제 수치(상위 5개).
 
 | rank | id | pTM | ipTM | RMSD(Å) | H-bond | 길이(aa) |
 |------|----|-----|------|---------|--------|----------|
@@ -206,7 +206,7 @@ boltzgen run rna_spec.yaml --output workbench/rna \
 | 4 | rna_spec_16 | 0.607 | 0.424 | 2.24 | 10 | 92 |
 | 5 | rna_spec_09 | 0.573 | 0.424 | 2.39 | 13 | 117 |
 
-해석 — DNA와 비교하면 RNA 결합의 특성이 드러나요:
+해석 — DNA와 비교하면 RNA 결합의 특성이 드러나요.
 
 - **H-bond 평균 9.3개**(최종 10개 전체) — 단백질-단백질(한 자릿수)보다는 많지만 **DNA(평균 30.8개)보다는 훨씬 적어요**. RNA도 인산 골격이 음전하지만, 타깃이 20nt 단일가닥 헤어핀이라 DNA 이중나선보다 접촉면이 작기 때문이에요.
 - **ipTM 0.36~0.45** — DNA(0.50~0.59)보다 낮아요. RNA는 단일가닥이라 구조가 더 유연·불규칙해서 결합 인터페이스를 잡기가 DNA보다 까다로워요.

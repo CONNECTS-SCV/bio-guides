@@ -100,7 +100,7 @@ export IGDATA=$(dirname $(dirname $(which igblastp)))/share/igblast
 igblastp -query parental_H.fasta -germline_db_V db/human_gl_V -organism human -outfmt 7
 ```
 
-**실측 결과** — parental heavy chain의 top V hit:
+**실측 결과** — parental heavy chain의 top V hit.
 
 ```text
 # Fields: query, subject, % identity, alignment length, mismatches, ..., evalue, bit score

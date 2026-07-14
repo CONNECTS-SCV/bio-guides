@@ -88,7 +88,7 @@ H(항체)–N(항원) 4 Å contact: **15개 residue pair, 총 39 atom contacts**
 
 ## 7.4 FreeSASA·PLIP로 더 깊이
 
-contact만으로 부족할 때:
+contact만으로 부족할 때.
 
 ```bash
 # SASA / buried surface area

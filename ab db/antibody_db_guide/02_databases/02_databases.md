@@ -41,7 +41,7 @@ part: A
 
 SAbDab은 PDB의 항체 구조를 **consistent fashion으로 annotation**해 제공하는 대표 구조 DB예요.[1] 항체 chain·antigen chain·resolution·method·species·affinity·CDR length 같은 항체 분석용 필드로 검색할 수 있어요.[2]
 
-SAbDab을 쓸 때 확인할 필드(노트북에서 체크리스트로 만들어요):
+SAbDab을 쓸 때 확인할 필드(노트북에서 체크리스트로 만들어요).
 
 - PDB ID, heavy/light/antigen chain ID, resolution, antibody species, antigen type
 - affinity value 존재 여부, bound/unbound 여부, CDR sequence/length
@@ -99,7 +99,7 @@ OAS는 구조 DB가 아니라 **대규모 항체 repertoire 서열 DB**예요. 1
 
 ## 2.4 IMGT/3Dstructure-DB
 
-IMGT는 immunoglobulins·TCR·MHC를 다루는 국제 immunogenetics 표준 체계예요.[5] IMGT/3Dstructure-DB는 그 표준 안에서 면역 단백질 구조를 annotation해요. SAbDab과 비교하면:
+IMGT는 immunoglobulins·TCR·MHC를 다루는 국제 immunogenetics 표준 체계예요.[5] IMGT/3Dstructure-DB는 그 표준 안에서 면역 단백질 구조를 annotation해요. SAbDab과 비교하면.
 
 | 항목 | SAbDab | IMGT/3Dstructure-DB |
 |------|--------|---------------------|

@@ -33,7 +33,7 @@ IgFoldRunner().fold("my_run/demo_antibody_igfold.pdb", sequences=seqs,
                     do_refine=False, do_renum=True)
 ```
 
-> **주의** — **실제로 겪은 3가지 함정**(Ch.03의 3.3에 상세):
+> **주의** — **실제로 겪은 3가지 함정**(Ch.03의 3.3에 상세).
 > ① torch≥2.6의 `weights_only=True` → 체크포인트 로드 실패. `torch.load`를 `weights_only=False`로 감싸요.
 > ② **최신 transformers(5.x)에서는 체크포인트 unpickle 이 실패해요**(`Trie`·`BasicTokenizer` AttributeError) → **`transformers==4.36.2`** 로 고정(노트북 부트스트랩이 자동으로 맞춰 줍니다).
 > ③ torch가 시스템 드라이버보다 최신 CUDA로 빌드됐으면 GPU 초기화가 실패해요 → 스크립트의 `--cpu`(=`CUDA_VISIBLE_DEVICES=""`)로 우회.

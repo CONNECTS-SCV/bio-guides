@@ -19,7 +19,7 @@ language: ko
 
 논문 Figure 색 규약을 따라요: **바인더 = 금색(gold), 타깃 = 파랑(blue)**.
 
-PyMOL 공통 세팅(스크립트 맨 앞에):
+PyMOL 공통 세팅(스크립트 맨 앞에).
 ```python
 bg_color white
 set ray_opaque_background, 0

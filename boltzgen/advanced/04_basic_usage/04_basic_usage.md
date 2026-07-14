@@ -19,7 +19,7 @@ language: ko
 
 ## 4.1 `boltzgen run` 명령의 구조
 
-기본 형태는 이래요:
+기본 형태는 이래요.
 
 ```bash
 boltzgen run <설계명세.yaml> \
@@ -29,7 +29,7 @@ boltzgen run <설계명세.yaml> \
   --budget <최종 선별 수>
 ```
 
-실제 예시(우리가 돌린 그대로):
+실제 예시(우리가 돌린 그대로).
 
 ```bash
 boltzgen run example/vanilla_protein/1g13prot.yaml \
@@ -39,7 +39,7 @@ boltzgen run example/vanilla_protein/1g13prot.yaml \
   --budget 2
 ```
 
-각 인자의 의미:
+각 인자의 의미.
 
 | 인자 | 의미 |
 |------|------|
@@ -55,7 +55,7 @@ boltzgen run example/vanilla_protein/1g13prot.yaml \
 
 ## 4.2 6스텝 파이프라인 — 실제로 무슨 일이 일어나나
 
-`protein-anything` 기준으로 실행하면 로그에 이렇게 찍혀요(우리 실측):
+`protein-anything` 기준으로 실행하면 로그에 이렇게 찍혀요(우리 실측).
 
 ```
 [1] design                   213.7s  (예시; 규모에 따라 다름)
@@ -66,7 +66,7 @@ boltzgen run example/vanilla_protein/1g13prot.yaml \
 [6] filtering               
 ```
 
-각 단계가 무엇을 만드는지(Ch.01 복습 + 실제 산출물):
+각 단계가 무엇을 만드는지(Ch.01 복습 + 실제 산출물).
 
 1. **design** — 타깃에 맞는 백본을 `num_designs`개 생성. → `intermediate_designs/*.cif`(+ `*.npz`)
 2. **inverse_folding** — 각 백본에 서열을 채움. → `intermediate_designs_inverse_folded/*.cif`
@@ -141,7 +141,7 @@ boltzgen run spec.yaml --output out \
   --config folding num_workers=4 trainer.devices=2
 ```
 
-그 외 자주 쓰는 실행 제어 옵션:
+그 외 자주 쓰는 실행 제어 옵션.
 
 | 옵션 | 용도 |
 |------|------|
@@ -157,13 +157,13 @@ boltzgen run spec.yaml --output out \
 
 ## 4.6 출력 구조 완전 해부
 
-먼저 최종 산출물이 어떻게 생겼는지 볼까요? 디자인된 바인더(금색)가 타깃(파랑)에 결합한 **3D 복합체**예요:
+먼저 최종 산출물이 어떻게 생겼는지 볼까요? 디자인된 바인더(금색)가 타깃(파랑)에 결합한 **3D 복합체**예요.
 
 ![바인더–타깃 복합체](04_binder_target_complex.png)
 
 *BoltzGen이 만든 최종 디자인 1개의 실제 구조(vanilla 단백질 바인더 + 타깃). 이런 복합체가 `--budget`개만큼 나와요. (렌더링 레시피: `../FIGURE_PLAN.md`)*
 
-그리고 `--output` 폴더에는 이런 **파일 구조**가 생겨요(우리 실측 트리 그대로):
+그리고 `--output` 폴더에는 이런 **파일 구조**가 생겨요(우리 실측 트리 그대로).
 
 ```
 results/                                   # = --output
@@ -191,7 +191,7 @@ results/                                   # = --output
     └── results_overview.pdf               #   요약 시각화 PDF
 ```
 
-꼭 기억할 세 가지:
+꼭 기억할 세 가지.
 
 - **최종 디자인**은 `final_ranked_designs/final_<budget>_designs/rankN_<name>_K.cif`예요. 폴더가 아니라 **순위 붙은 단일 CIF 파일**이고, 서열·구조가 그 안에 다 들어 있어요. (`summary.csv`, 디자인별 `rank_001/` 폴더, 별도 `sequence.fasta`/`metrics.json` 같은 건 **생기지 않아요** — 흔한 오해예요.)
 - **메트릭**은 `final_designs_metrics_<budget>.csv`(최종셋)와 `all_designs_metrics.csv`(전체)에 들어 있어요. 한 디자인이 한 행, 컬럼은 240여 개예요(Ch.05).
@@ -203,21 +203,21 @@ results/                                   # = --output
 
 ## 4.7 프로토콜별 실행 예시
 
-같은 `boltzgen run`이라도 프로토콜에 따라 명령과 결과가 달라져요. 대표 3종을 미리 맛보기로(자세한 실습은 Part B):
+같은 `boltzgen run`이라도 프로토콜에 따라 명령과 결과가 달라져요. 대표 3종을 미리 맛보기로(자세한 실습은 Part B).
 
-**단백질–단백질 바인더** (Ch.01의 기본):
+**단백질–단백질 바인더** (Ch.01의 기본).
 ```bash
 boltzgen run example/vanilla_protein/1g13prot.yaml \
   --output out/protein --protocol protein-anything --num_designs 1000 --budget 50
 ```
 
-**고리형 펩타이드** (Cys 자동 금지, design_folding 생략 → Ch.07):
+**고리형 펩타이드** (Cys 자동 금지, design_folding 생략 → Ch.07).
 ```bash
 boltzgen run example/cyclotide/3ivq.yaml \
   --output out/peptide --protocol peptide-anything --num_designs 1000 --budget 30
 ```
 
-**소분자 결합 + 친화도** (affinity 스텝 추가 → Ch.10):
+**소분자 결합 + 친화도** (affinity 스텝 추가 → Ch.10).
 ```bash
 boltzgen run example/protein_binding_small_molecule/chorismite.yaml \
   --output out/sm --protocol protein-small_molecule --num_designs 3000 --budget 40

@@ -1761,7 +1761,7 @@ print("\\n두 순서가 다르면? 정상입니다 — humanness 와 nativeness 
 md("""## 이 랩에서 확인한 것
 
 1. 랭킹은 **여러 축의 가중합 + hard filter** 입니다. 점수 1위여도 CDR 이 파손됐거나 신규 N-glyc 모티프가 생겼으면 **탈락**입니다.
-2. 실측 지표(후보 5종):
+2. 실측 지표(후보 5종).
    - **humanness**(Sapiens 재스코어링, paired) — parental 0.7303 · Sapiens **0.8424** · Humatch 0.7988 · AnthroAb 0.7941 · AnthroAb(FR-masked) 0.7136
    - **nativeness**(AbNatiV1 VH) — parental 0.6477 · Sapiens **0.8803** · Humatch 0.8305 · AnthroAb 0.8064
    - **germline V identity** — parental VH 0.63 → Sapiens/Humatch **0.80**

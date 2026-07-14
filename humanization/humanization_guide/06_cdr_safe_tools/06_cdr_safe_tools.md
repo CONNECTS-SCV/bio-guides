@@ -87,7 +87,7 @@ Humanising 1 sequences
 
 VH mutation(18개: `Q5V, R40A, A66G, K67R, I78T, ...`)은 **전부 framework**입니다. Sapiens가 찾은 mutation과 `Q5V·M20V·R40A·A66G·K67R·I78T·Q82E·S91T` 등 상당수가 겹칩니다 — 두 도구가 공통으로 제안하는 자리라 **신뢰도가 높은 humanizing position**이라는 뜻입니다([Ch.02](../02_nomenclature_strategy/02_nomenclature_strategy.md) 심화의 "교차검증" 원칙이 실제로 작동!).
 
-> **주의 — 같은 입력, 전혀 다른 CDR 안전성.** 똑같은 경쇄에 대해:
+> **주의 — 같은 입력, 전혀 다른 CDR 안전성.** 똑같은 경쇄에 대해.
 > - **Sapiens(가드 없는 argmax)** → CDR-L1(`H31A, K32Y, F33N, P34D`)에 **mutation 4개**
 > - **Humatch(기본 설정)** → VL 전체에 mutation 2개(`G85E, V108T`), **CDR에는 0개**
 >
@@ -210,7 +210,7 @@ filled = anthroab.predict_masked(masked, "H")
 | 66 | A | G | D | ✗ |
 | 67 | K | R | K | ✗ |
 
-> **심화 — 합의된 것만 믿습니다.** 위 표는 AnthroAb의 **FR-masked 모드**에서 Sapiens와 겹치는 자리를 뽑은 것입니다. 세 도구(Sapiens·Humatch·AnthroAb)가 **똑같은 치환을 제안한 자리**를 실제로 세어 보면(`data/three_way_consensus.csv`, 노트북에서 직접 계산합니다):
+> **심화 — 합의된 것만 믿습니다.** 위 표는 AnthroAb의 **FR-masked 모드**에서 Sapiens와 겹치는 자리를 뽑은 것입니다. 세 도구(Sapiens·Humatch·AnthroAb)가 **똑같은 치환을 제안한 자리**를 실제로 세어 보면(`data/three_way_consensus.csv`, 노트북에서 직접 계산합니다).
 >
 > - **AnthroAb best-score 모드**: 합의 **7곳** — H5(Q→V), H21(M→V), H42(G→V), H68(N→A), H74(A→G), H75(K→R), L99(G→E) *(IMGT 번호)*. **이 모드에서는 `I78T`가 합의에 들지 않습니다.**
 > - **AnthroAb FR-masked 모드**: 합의 **12곳** — 위 7곳에 H46·H76·H86·H99 등이 추가되고, `I78T`(IMGT `H86`)가 **여기 포함됩니다.**
@@ -225,7 +225,7 @@ filled = anthroab.predict_masked(masked, "H")
 
 ### 6.2.7 결과 해석
 
-AnthroAb 출력은 최종 후보가 아니라 **mutation 제안의 한 표(vote)** 로 봅니다. 우선순위를 올릴 만한 경우:
+AnthroAb 출력은 최종 후보가 아니라 **mutation 제안의 한 표(vote)** 로 봅니다. 우선순위를 올릴 만한 경우.
 
 - BioPhi/Sapiens·Humatch·AnthroAb가 **같은 자리에 같은 잔기**를 제안 (실측: `I78T`가 세 도구 합의)
 - 제안 잔기가 human germline·OAS repertoire에서 흔히 관찰됨
