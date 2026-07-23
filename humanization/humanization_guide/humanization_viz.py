@@ -38,9 +38,10 @@ def _use_korean_font():
     for cand in ("NanumGothic", "NanumBarunGothic", "Noto Sans CJK KR",
                  "Noto Sans CJK JP", "Noto Sans KR", "Malgun Gothic", "AppleGothic"):
         if cand in have:
-            # 단일 family 로 바꾸면 한글은 살지만 Å 같은 글리프가 깨집니다.
-            # 폴백 목록으로 둬서 한글은 한글 폰트가, 나머지는 DejaVu 가 맡게 합니다.
-            matplotlib.rcParams["font.family"] = "sans-serif"
+            # font.family 를 '리스트' 로 줘야 matplotlib 이 글리프 단위 폴백을 한다.
+            # "sans-serif" + font.sans-serif 조합으로는 폴백이 안 걸려 Å(U+00C5) 가 □ 로 깨진다
+            # (NanumGothic 에 U+00C5 글리프가 없음). 한글은 한글 폰트, 나머지는 DejaVu 가 맡는다.
+            matplotlib.rcParams["font.family"] = [cand, "DejaVu Sans"]
             matplotlib.rcParams["font.sans-serif"] = [cand, "DejaVu Sans"]
             break
     matplotlib.rcParams["axes.unicode_minus"] = False
