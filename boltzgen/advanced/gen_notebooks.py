@@ -55,8 +55,17 @@ IN_COLAB = "google.colab" in sys.modules
 os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")   # 스트림 30초 무응답 → 끊고 재시도
 os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "15")
 
-def _run(cmd):
-    print("$", cmd); subprocess.run(cmd, shell=True, check=True)
+def _run(cmd, quiet=False):
+    """quiet=True 면 출력을 삼키고 **실패했을 때만** 보여줘요.
+    apt-get 은 "(Reading database ... 5%(Reading database ... 10%" 같은 진행률을 600자 넘게 쏟아내는데,
+    그게 노트북을 연 학습자가 보는 첫 화면을 덮어버려서 실패로 오해하게 만들거든요."""
+    print("$", cmd)
+    if not quiet:
+        subprocess.run(cmd, shell=True, check=True); return
+    p = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if p.returncode != 0:
+        print((p.stdout or "") + (p.stderr or ""))
+        raise subprocess.CalledProcessError(p.returncode, cmd)
 
 _MARK = "boltzgen_viz.py"          # 이 파일이 있는 폴더가 advanced/ 루트
 
@@ -85,7 +94,8 @@ sys.path.insert(0, str(ADV_ROOT))     # boltzgen_viz import 보장
 import glob as _glob
 if IN_COLAB and not _glob.glob("/usr/share/fonts/**/*Nanum*", recursive=True):
     # Colab 에는 한글 폰트가 없어 그래프의 한글 라벨이 □ 로 깨집니다.
-    _run("apt-get -qq update"); _run("apt-get -qq install -y fonts-nanum")
+    _run("apt-get -qq update", quiet=True)
+    _run("DEBIAN_FRONTEND=noninteractive apt-get -qq install -y fonts-nanum", quiet=True)
 
 # import 안 되는 패키지만 설치합니다.
 import importlib, importlib.util
@@ -310,8 +320,10 @@ def load_design(pattern, ref, row=None,
 
     for ch in model:
         n = len(ch.get_polymer()) or len(ch)
+        # hetero(리간드·금속)는 one-letter 서열이 안 나와 칸이 비어 보여요 — 잔기 이름을 대신 보여줍니다.
+        what = chain_seq3d(ch)[:28] or "·".join(sorted({r.name for r in ch}))
         print(f"  사슬 {ch.name:<2s} {'설계' if ch.name in design else '타깃'} "
-              f"| {chain_kind3d(ch):<7s} {n:>4d} | {chain_seq3d(ch)[:28]}")
+              f"| {chain_kind3d(ch):<7s} {n:>4d} | {what}")
     return st.make_pdb_string(), model, design, target, match
 
 def complex_view(pdb, model, design, target, width=760, height=540):
@@ -1203,6 +1215,7 @@ try:
 except Exception as e:
     print("aggregate_metrics_analyze.csv 를 못 찾았습니다 —", type(e).__name__)
 
+import textwrap
 print("\\n선별 전 전체 풀", len(pool), "개 | 컬럼", pool.shape[1], "개")
 if agg is not None:
     added = [col for col in pool.columns if col not in agg.columns]
@@ -1211,7 +1224,11 @@ if agg is not None:
         got = [a for a in added if a.startswith(pre)] if pre else \\
               [a for a in added if a in ("final_rank", "max_rank", "secondary_rank", "quality_score")]
         if got:
-            print(f"   {kind:16s}", ", ".join(got[:6]) + (" ..." if len(got) > 6 else ""))
+            # 한 줄에 몰아 찍으면 180자가 넘어 노트북에서 지저분하게 접혀요 — 접어서 냅니다.
+            head = ", ".join(got[:6]) + (f"  … (앞 6개만, 전체 {len(got)}개)" if len(got) > 6 else "")
+            print(f"   {kind}")
+            for line in textwrap.wrap(head, width=88):
+                print("      " + line)
 
 try:
     per = pd.read_csv(find_one("per_target_metrics_analyze.csv", "data/vanilla"))
@@ -1707,18 +1724,24 @@ co("""from collections import Counter
 SEQ_LEN   = 34                                 # 3+1+8+1+6+1+5+1+3+1+1+1+2
 CYS_SITES = [4, 13, 20, 26, 30, 32]            # 명세가 Cys 로 고정한 자리
 d = df.sort_values("final_rank")
-n_len = n_sites = 0
+rows, n_len, n_sites = [], 0, 0
 for _, r in d.iterrows():
     s = str(r["designed_chain_sequence"])
     pos = [i + 1 for i, a in enumerate(s) if a == "C"]
     kept = all(p in pos for p in CYS_SITES)
     n_len += int(len(s) == SEQ_LEN)
     n_sites += int(kept)
-    mark = "" if kept else "   <-- 제약 자리 누락"
-    print(f"rank{int(r['final_rank']):>2} {str(r['id']):9s} len={len(s):3d} Cys={len(pos):2d} @ {pos}{mark}")
-print(f"\\n길이 {SEQ_LEN}aa {n_len}/{len(d)} | 제약 Cys 6자리 전부 보존 {n_sites}/{len(d)}")
-print("Cys 총개수 분포", dict(sorted(Counter(str(x).count("C")
-                                        for x in d["designed_chain_sequence"]).items())))"""),
+    rows.append({"rank": int(r["final_rank"]), "id": str(r["id"]),
+                 "길이": f"{len(s)}" + ("" if len(s) == SEQ_LEN else f" (명세 {SEQ_LEN} 아님)"),
+                 "Cys 개수": len(pos),
+                 "Cys 위치": "·".join(map(str, pos)),            # 대괄호 없이
+                 "제약 6자리": "O 보존" if kept else "X 누락"})
+display(pd.DataFrame(rows))
+
+print(f"길이 {SEQ_LEN}aa {n_len}/{len(d)} · 제약 Cys 6자리 전부 보존 {n_sites}/{len(d)}")
+dist = sorted(Counter(str(x).count("C") for x in d["designed_chain_sequence"]).items())
+print("Cys 총개수 분포 —", " · ".join(f"{k}개인 디자인 {v}개" for k, v in dist))
+print(f"명세가 고정한 자리는 {'·'.join(map(str, CYS_SITES))} 예요 — 위 표의 'Cys 위치' 에 이 여섯이 다 들어 있어야 해요.")"""),
 md("""합격선은 길이와 제약 자리예요. 6자리가 전부 살아 있으면 이황화 3쌍을 만들 재료가 갖춰진 거고,
 그 밖의 자리에 Cys 가 더 붙은 건 생성 다양성이라 그 자체로는 탈락 사유가 아니에요.
 다만 짝 없는 Cys 는 응집 위험이니, 실제로 어느 쌍이 결합했는지는 8절에서 거리로 확인합니다."""),
@@ -1739,7 +1762,8 @@ hit = [ch for ch in model if chain_seq(ch) == want]
 design = hit[0] if hit else min(model, key=lambda ch: len(ch))   # 폴백은 가장 짧은 사슬
 res = list(design)
 
-print(cif.name, "| 사슬 구성", {ch.name: len(ch) for ch in model})
+print(cif.name, "| 사슬 구성 —",
+      " · ".join(f"{ch.name} {len(ch)}잔기" for ch in model))
 print(f"설계 사슬 = {design.name} ({len(res)}잔기), 나머지가 타깃")
 
 n_at, c_at = res[0].find_atom("N", "*"), res[-1].find_atom("C", "*")
@@ -1803,7 +1827,7 @@ for cid in DESIGN:
                   {"stick": {"color": "#2980b9", "radius": 0.3}})
     view.addStyle({"chain": cid, "resi": [res[-1].seqid.num]},
                   {"stick": {"color": "#c0392b", "radius": 0.3}})
-    print(f"  설계 사슬 {cid} — Cys {len(cys)}개 @ {cys} | N말단 {res[0].seqid.num}(파랑) "
+    print(f"  설계 사슬 {cid} — Cys {len(cys)}개 @ {'·'.join(map(str, cys))} | N말단 {res[0].seqid.num}(파랑) "
           f"· C말단 {res[-1].seqid.num}(빨강)")
 
 view.zoomTo({"chain": DESIGN})        # 34잔기 펩타이드가 작아서 설계 사슬 기준으로 당깁니다
@@ -2077,7 +2101,9 @@ for _, r in df.head(5).iterrows():
 
 kinds = collections.Counter(chain_kind(str(r[col])) for _, r in df.iterrows() for col in chain_cols)
 print()
-print("사슬 종류 분포", dict(kinds))
+LABEL = {"VH": "중쇄 VH", "VL-k": "경쇄 VL(κ)", "VL-l": "경쇄 VL(λ)", "?": "판별 실패"}
+print(f"사슬 종류 분포 (최종 {len(df)}개 전체) —",
+      " · ".join(f"{LABEL.get(k, k)} {v}개" for k, v in kinds.most_common()))
 print("→ 한 디자인에서 VH 와 VL 이 하나씩 잡히고 사슬당 Cys 가 2개면 CDR 만 바뀐 정상 그래프팅이에요.")
 print("→ framework 가 많이 변했으면 scaffold YAML 의 not_design 범위를 넓혀 더 고정하세요 (본문 8.6).")'''),
 md("""## 8) 어떤 후보를 실험으로 보낼까 (본문 8.7)
@@ -2638,7 +2664,8 @@ for ch in model:
         pocket[ch.name] = hit
         view.addStyle({"chain": ch.name, "resi": hit},
                       {"stick": {"colorscheme": "orangeCarbon", "radius": 0.14}})
-        print(f"  사슬 {ch.name} 포켓 잔기 {len(hit)}개 @ {hit[:12]}{' …' if len(hit) > 12 else ''}")
+        shown = "·".join(map(str, hit[:12])) + (f" … (앞 12개만, 전체 {len(hit)}개)" if len(hit) > 12 else "")
+        print(f"  사슬 {ch.name} 포켓 잔기 {len(hit)}개 @ {shown}")
 
 view.zoomTo({"resn": list(LIG)} if LIG else {})     # 포켓을 중심으로 당겨 봅니다
 view.show()
@@ -2934,7 +2961,7 @@ for ch in model:
              and any(a.pos.dist(p) <= 3.0 for a in r for p in zn_pos)]
     view.addStyle({"chain": ch.name, "resi": coord},
                   {"stick": {"colorscheme": "yellowCarbon", "radius": 0.2}})
-    print(f"  Zn 이온 {len(zn_pos)}개 | 사슬 {ch.name} 의 배위 잔기 {len(coord)}개 @ {coord}")
+    print(f"  Zn 이온 {len(zn_pos)}개 | 사슬 {ch.name} 의 배위 잔기 {len(coord)}개 @ {'·'.join(map(str, coord))}")
 
 view.zoomTo()
 view.show()

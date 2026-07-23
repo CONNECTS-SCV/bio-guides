@@ -45,6 +45,11 @@ def _use_korean_font():
             matplotlib.rcParams["font.sans-serif"] = [cand, "DejaVu Sans"]
             break
     matplotlib.rcParams["axes.unicode_minus"] = False
+    # NanumGothic 에는 bold 페이스가 없어 fontweight="bold" 를 쓸 때마다
+    # "findfont: Failed to find font weight bold, now using 600." 이 출력에 섞인다.
+    # 렌더는 정상(600 으로 합성)이라 이 잡음만 낮춘다 — 진짜 폰트 에러는 그대로 보인다.
+    import logging
+    logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 
 
 _use_korean_font()

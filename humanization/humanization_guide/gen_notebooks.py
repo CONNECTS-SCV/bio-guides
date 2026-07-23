@@ -68,10 +68,20 @@ IN_COLAB = "google.colab" in sys.modules
 os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")   # 스트림 30초 무응답 → 끊고 재시도
 os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "15")
 
-def _run(cmd, check=True, timeout=None):
+def _run(cmd, check=True, timeout=None, quiet=False):
     # timeout 을 꼭 주세요 — 네트워크가 '멈춘 채' 매달리면 예외가 안 나서 data/ 폴백이 안 걸립니다.
+    """quiet=True 면 출력을 삼키고 **실패했을 때만** 보여줘요.
+    apt-get 은 "(Reading database ... 5%(Reading database ... 10%" 같은 진행률을 600자 넘게 쏟아내는데,
+    그게 노트북을 연 학습자가 보는 첫 화면을 덮어버려서 실패로 오해하게 만들거든요."""
     print("$", cmd)
-    return subprocess.run(cmd, shell=True, check=check, timeout=timeout)
+    if not quiet:
+        return subprocess.run(cmd, shell=True, check=check, timeout=timeout)
+    p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
+    if p.returncode != 0:
+        print((p.stdout or "") + (p.stderr or ""))
+        if check:
+            raise subprocess.CalledProcessError(p.returncode, cmd)
+    return p
 
 _MARK = "humanization_viz.py"          # 이 파일이 있는 폴더 = 가이드 루트
 
@@ -130,8 +140,8 @@ if IN_COLAB and not _glob.glob("/usr/share/fonts/**/*Nanum*", recursive=True):
     _APT.append("fonts-nanum")             # Colab 엔 한글 폰트가 없어 라벨이 □ 로 깨져요
 
 if _APT:                                   # apt 인덱스 갱신은 한 번만 (ANARCI 는 hmmscan 이 필요해요)
-    _run("apt-get -qq update", timeout=600)
-    _run("apt-get -qq install -y " + " ".join(_APT), timeout=900)
+    _run("apt-get -qq update", timeout=600, quiet=True)
+    _run("DEBIAN_FRONTEND=noninteractive apt-get -qq install -y " + " ".join(_APT), timeout=900, quiet=True)
 
 
 # ── ① 내가 만든 결과(my_run) 우선 · ② 없으면 커밋된 레퍼런스(data/) ─────────────
@@ -628,8 +638,10 @@ else:
         p = find_one(f"raw2imgt_{tag}.json")
         r2i[tag] = {int(k): v for k, v in json.loads(pathlib.Path(p).read_text()).items()}
 
-print("raw → IMGT (VH)", {k: r2i["H"][k] for k in (5, 12, 78, 115) if k in r2i["H"]})
-print("raw → IMGT (VL)", {k: r2i["L"][k] for k in (31, 85, 109, 111) if k in r2i["L"]})
+def _cross(chain, picks):        # 대괄호·중괄호 없이 "raw 78 → H86" 꼴로 읽히게
+    return " · ".join(f"raw {k} → {r2i[chain][k]}" for k in picks if k in r2i[chain])
+print("raw → IMGT (VH) —", _cross("H", (5, 12, 78, 115)))
+print("raw → IMGT (VL) —", _cross("L", (31, 85, 109, 111)))
 last_l = max(r2i["L"])
 print(f"VL 마지막 잔기 raw {last_l} → {r2i['L'][last_l]} — IMGT 범위 밖이라 tail 로 라벨링돼요")
 print("판정 — Sapiens 가 'I78T' 라고 하면 raw 78번이고, 같은 잔기의 IMGT 번호는",
