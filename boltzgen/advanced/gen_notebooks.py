@@ -240,17 +240,20 @@ else:
     ]
 
 
-def title_cell(num, name, ko, md_link, gpu="none"):
+def title_cell(num, name, ko, md_link, gpu="none", prev=None):
     src = {"design": "> 이 노트북의 표·그래프·수치는 **여러분이 직접 돌린 결과**(`my_run/`)에서 계산합니다.\n",
            "optional": "", "none": ""}[gpu]
+    # 앞 챕터 my_run 을 물려받는 노트북은 그 사실을 도입부에서 먼저 밝힌다.
+    # (중간부터 들어온 학습자가 조용히 커밋 데이터로 폴백되는 걸 모르고 지나가지 않도록)
+    link = f"> **앞 랩에서 이어져요** — {prev} 의 `my_run/` 을 먼저 찾고, 없으면 커밋된 `data/` 로 대신합니다.\n" if prev else ""
     badge = RUN_BADGE[gpu]
     return md(f"""# {num} — {ko}
 
 > 본문 [`{md_link}`]({md_link}) 와 **한 절씩 짝지어** 보세요.
-{src}{badge}""" if badge else f"""# {num} — {ko}
+{link}{src}{badge}""" if badge else f"""# {num} — {ko}
 
 > 본문 [`{md_link}`]({md_link}) 와 **한 절씩 짝지어** 보세요.
-{src}""")
+{link}{src}""")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1119,7 +1122,8 @@ cells_all[("04_basic_usage", "04_run_pipeline.ipynb", "04 Run Pipeline")] = c
 #   · 문장 끝 콜론 제거(마크다운·print 출력문 모두).
 # ─────────────────────────────────────────────────────────────────────────────
 
-c = [title_cell("05", "05_result_interpretation", "결과 해석·시각화", "05_result_interpretation.md", gpu="design")]
+c = [title_cell("05", "05_result_interpretation", "결과 해석·시각화", "05_result_interpretation.md", gpu="design",
+                prev="Ch.04 에서 돌린 설계")]
 c += boot("05_result_interpretation", pip="pandas matplotlib gemmi py3Dmol")
 c += design_cells("example/vanilla_protein/1g13prot.yaml", "protein-anything", 8, 4,
                   "레퍼런스 결과는 num_designs=100", sec=1)
@@ -1380,7 +1384,8 @@ cells_all[("05_result_interpretation", "05_analysis_viz.ipynb", "05 Analysis & V
 #  · 절 번호 1)~10) 중복 없이 연속, 모든 제목에 실재하는 (본문 N.M) 앵커.
 
 # ── 06 고급 필터링·자동화 ───────────────────────────────────────────────────
-c = [title_cell("06", "06_advanced_ai", "고급 필터링·자동화", "06_advanced_ai.md")]
+c = [title_cell("06", "06_advanced_ai", "고급 필터링·자동화", "06_advanced_ai.md",
+                prev="Ch.05 · Ch.04")]
 c += boot("06_advanced_ai", pip="pandas matplotlib")
 c += [
 md("""## 1) 선별 전 전체를 펼치기 (본문 6.2)
@@ -1419,9 +1424,10 @@ if "pass_ALA_fraction_filter" in df.columns:
     agree = int((keep == df["pass_ALA_fraction_filter"].astype(bool)).sum())
     print(f"내장 pass_ALA_fraction_filter 와 일치 {agree}/{len(df)}")
 
-print("\\n부등호를 'ALA_fraction>0.3' 으로 뒤집으면 남는 건 바로 이쪽 (버리려던 것만 남음)")
-print(df.loc[drop, cols_in(df, "id", "ALA_fraction", "design_ptm", "design_to_target_iptm")]
-        .sort_values("ALA_fraction", ascending=False).head(5).to_string(index=False))"""),
+flip = df.loc[drop, cols_in(df, "id", "ALA_fraction", "design_ptm", "design_to_target_iptm")] \\
+         .sort_values("ALA_fraction", ascending=False)
+print(f"\\n부등호를 'ALA_fraction>0.3' 으로 뒤집으면 남는 건 이 {len(flip)}개 — 버리려던 것만 정확히 남아요")
+print(flip.to_string(index=False))"""),
 md("""## 3) `--filter_biased` — 조성 이상치를 기본으로 거른다 (본문 6.4)
 
 방금 본 Ala-rich 배제는 사실 기본으로 켜져 있어요(`--filter_biased`, 기본 true).
@@ -1988,6 +1994,7 @@ design_insertions: [ { insertion: { id: H, res_index: 99, num_residues: 1..12 } 
 co('''des_cols = cols_in(df, "designed_sequence_1", "designed_sequence_2") or cols_in(df, "designed_sequence")
 has_nd = "num_design" in df.columns
 
+print(f"최종 {len(df)}개 중 상위 5개만 펼쳐 봅니다 (나머지는 아래 집계로 확인해요)")
 for _, r in df.head(5).iterrows():
     parts = [str(r[col]) for col in des_cols]
     lens = "+".join(str(len(p)) for p in parts)
@@ -2061,6 +2068,7 @@ def chain_kind(s):
 
 chain_cols = cols_in(df, "full_sequence_1", "full_sequence_2") or cols_in(df, "designed_chain_sequence")
 
+print(f"최종 {len(df)}개 중 상위 5개 (바로 아래 '사슬 종류 분포' 는 {len(df)}개 전체 기준이에요)")
 for _, r in df.head(5).iterrows():
     for col in chain_cols:
         s = str(r[col])

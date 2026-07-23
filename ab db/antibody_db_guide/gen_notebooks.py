@@ -183,12 +183,15 @@ def bootstrap(chapter, pip_pkgs="pandas matplotlib", hmmer=False, pin_transforme
                 .replace("@PIN@BLOCK", pin))
 
 
-def header(chapter_dir, chapter_md, title, what):
+def header(chapter_dir, chapter_md, title, what, prev=None):
+    # 앞 챕터 my_run 을 물려받는 노트북은 도입부에서 먼저 밝힌다 — 중간부터 들어온
+    # 학습자가 자기도 모르게 커밋된 data/ 로 폴백된 채 진행하지 않도록.
+    link = f"> **앞 랩에서 이어져요** — {prev} 의 `my_run/` 을 먼저 찾고, 없으면 커밋된 `data/` 로 대신합니다.\n" if prev else ""
     return [md(f'''# {title}
 
 > 본문: [`{chapter_md}`]({chapter_md}) 와 **한 절씩 짝지어** 보세요.
 > **전 셀 실행 {RUNTIME[chapter_dir]}** (실측)
-
+{link}
 **이 노트북은 도구를 직접 돌립니다.** {what}
 내 결과는 `my_run/` 에 쌓이고 커밋된 `data/` 는 대조군이에요 — 어느 단계가 실패해도 `resolve()` 가 `data/` 로 폴백해 뒤 절이 계속 돌아갑니다.'''),
             md('''## 0) 부트스트랩 — 저장소 클론 · 도구 설치 · 작업 폴더 이동
@@ -226,10 +229,11 @@ def nb_02():
     c = header("02_databases", "02_databases.md", "02 — 항체 DB landscape (RCSB 스냅샷 직접 조회)",
                "RCSB Search/Data API 로 항체–항원 복합체 스냅샷을 **직접 만들어** `my_run/` 에 저장해요.")
     c += [bootstrap("02_databases", pip_pkgs="pandas requests"),
-          md('''## 1) 먼저 지도 — DB 성격별 분류와 확인 필드 (본문 2.1)
+          md('''## 1) 먼저 지도 — DB 성격별 분류와 확인 필드 (본문 2.1~2.6)
 
 항체 DB 는 성격이 제각각이라 "어디서 무엇을 가져오나"부터 정해야 해요. 성격으로 나눈 여섯 유형을
-세워 두고, 그중 **구조 DB** 축을 2절에서 직접 뽑아 봅니다.
+세워 두고, 그중 **구조 DB** 축을 2절에서 직접 뽑아 봅니다. 아래 표의 여섯 줄이 본문 2.2~2.6 을
+한 눈에 접은 것이라, 뒤 챕터에서 어느 DB 를 다시 만나는지도 마지막 열로 확인할 수 있어요.
 
 구조 DB 를 볼 때 확인해야 할 필드 목록(본문 2.2)도 같이 만들어 둬요 — 3절에서 이 목록이
 RCSB 스냅샷으로 **몇 개나 채워지는지** 세어 볼 거예요.'''),
@@ -525,7 +529,8 @@ ok = (envs["존재"] == "O").all() and (envs["빠진 항목"] == "없음").all()
 print(f"판정 — 환경 파일 {len(envs)}개 중 존재 {int((envs['존재'] == 'O').sum())}개 ·",
       "필요한 항목이 전부 들어 있어요." if ok else "위 표의 '빠진 항목' 을 채워야 해요.")
 print("      transformers==4.36.2 고정은 IgFold 체크포인트에 pickle 된 옛 토크나이저 때문이에요(본문 3.3).")
-print("      PyMOL 은 pip·conda 어느 쪽으로도 이 목록에 못 들어가요 — Ch.06·07 의 3D 렌더만 커밋 이미지로 대체합니다(본문 3.0).")'''),
+print("      PyMOL 은 pip·conda 어느 쪽으로도 이 목록에 못 들어가요. 대신 Ch.06·07 의 3D 는")
+print("      py3Dmol 인라인 뷰어로 띄우니 Colab 에서도 내 구조를 그대로 돌려 볼 수 있어요(본문 3.0).")'''),
           md("> 다음 → 본문 [04. numbering & germline](../04_numbering/04_numbering.md)")]
     write_nb(ROOT/"03_setup"/"03_setup_check.ipynb", c)
 
@@ -1498,7 +1503,8 @@ print(f"판정 — 표시한 이미지 = {shown}  |  출처 = {origin}")'''),
 # ===========================================================================
 def nb_08():
     c = header("08_developability", "08_developability.md", "08 — developability (liability scan 직접 실행)",
-               "`liability_scan.py` 를 **직접 돌려** 스캔 결과를 `my_run/` 에 만들고 커밋본과 대조해요.")
+               "`liability_scan.py` 를 **직접 돌려** 스캔 결과를 `my_run/` 에 만들고 커밋본과 대조해요.",
+               prev="Ch.04 numbering")
     c += [bootstrap("08_developability", pip_pkgs="pandas matplotlib biopython"),
           md('''## 1) 직접 실행 — liability scan (본문 8.1)
 
@@ -1790,7 +1796,8 @@ else:
 # ===========================================================================
 def nb_09():
     c = header("09_repertoire", "09_repertoire.md", "09 — repertoire & naturalness (OAS 직접 다운로드)",
-               "**진짜 OAS data unit** 을 직접 내려받아 CDR3 길이 분포를 만들고, 후보 항체의 위치를 재요.")
+               "**진짜 OAS data unit** 을 직접 내려받아 CDR3 길이 분포를 만들고, 후보 항체의 위치를 재요.",
+               prev="Ch.04 numbering")
     c += [bootstrap("09_repertoire", pip_pkgs="pandas matplotlib anarci abnumber", hmmer=True),
           md('''## 1) 직접 실행 — OAS data unit 다운로드 + CDR3 길이 집계 (본문 9.1)
 
