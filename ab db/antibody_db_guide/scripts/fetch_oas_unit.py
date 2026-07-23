@@ -46,8 +46,14 @@ def main():
     meta_line = text.split("\n", 1)[0].strip()
     try:
         meta = json.loads(meta_line.strip('"').replace('""', '"'))
-        keys = ["Species", "BSource", "BType", "Disease", "Chain", "Isotype", "Author", "Link"]
-        print("[OAS metadata]", {k: meta.get(k) for k in keys if k in meta}, file=sys.stderr)
+        # dict 를 그대로 찍으면 따옴표·중괄호가 섞여 한 줄로 흘러가요. 한 항목 한 줄로 세워 둡니다.
+        LABEL = {"Species": "종", "BSource": "채취 조직", "BType": "B세포 종류",
+                 "Disease": "질환/코호트", "Chain": "사슬", "Isotype": "isotype",
+                 "Author": "출처 논문", "Link": "DOI"}
+        print("[OAS metadata] 이 unit 이 어디서 온 데이터인지", file=sys.stderr)
+        for k, ko in LABEL.items():
+            if k in meta:
+                print(f"    {ko:<12s} {meta.get(k)}", file=sys.stderr)
     except Exception:
         print("[OAS metadata] 파싱 실패(무시하고 진행)", file=sys.stderr)
 

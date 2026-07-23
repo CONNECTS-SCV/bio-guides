@@ -21,9 +21,16 @@ BioPhi의 Sapiens humanization 알고리즘 그대로 재현합니다.
       --fasta-out  05_humanness/my_run/demo_humanized.fa
 """
 import argparse
+import os
 import pathlib
 import sys
 import time
+
+# transformers/huggingface 가 결과보다 긴 소음을 내요 — 가중치 로딩 진행바와
+# "tied weights ... will NOT tie them" 안내가 그것. 둘 다 정상 동작 중에 늘 나오고
+# 우리 출력(사슬별 humanness)을 밀어내서, import 전에 꺼 둡니다.
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
+os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 
 AA = list("ACDEFGHIKLMNPQRSTVWY")
 
