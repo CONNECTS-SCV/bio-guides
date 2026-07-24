@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"/Users/mac/Desktop/bio-guides/ab db/antibody_db_guide\\\" && echo \\\"=== 제 수정이 반영됐나 (새 문장) ===\\\" && grep -n \\\"pip로 설치되지 않습니다\\\\|이 둘을 직접 돌립니다\\\" combined.md && echo \\\"\\\" && echo \\\"=== 옛 복잡한...",
+  "error": "Exit code 1\n=== 제 수정이 반영됐나 (새 문장) ===\n487:> **주의** — **BioPhi CLI(`biophi sapiens`)는 pip로 설치되지 않습니다**(bioconda 전용). 대신 BioPhi가 내부적으로 쓰는 `sapiens`(언어모델)와 `abnumber`(numbering)는 pip로 설치되므로, Ch.05는 이 둘을 직접 돌립니다. Colab에서도 동작하며 결과는 CLI와 동일합니다.\n\n=== 옛 복잡한 문장 흔적 (0이어야) ===\n0",
+  "timestamp": "2026-07-24T07:28:22.704Z",
+  "retry_count": 1
+}

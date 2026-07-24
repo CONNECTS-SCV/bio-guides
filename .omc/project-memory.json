@@ -1,0 +1,303 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1784523732295,
+  "projectRoot": "/Users/mac/Desktop/bio-guides",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "ab db": {
+      "path": "ab db",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1784523732273,
+      "keyFiles": [
+        "aantibody_db_analysis_guide.pdf",
+        "aantibody_db_analysis_guide_v6.docx"
+      ]
+    },
+    "boltzgen": {
+      "path": "boltzgen",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1784523732273,
+      "keyFiles": [
+        "boltzgen.pdf",
+        "boltzgen_v5.docx"
+      ]
+    },
+    "humanization": {
+      "path": "humanization",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1784523732273,
+      "keyFiles": [
+        "humanization.pdf",
+        "humanization_v5.docx"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "ab db/antibody_db_guide/combined.md",
+      "accessCount": 96,
+      "lastAccessed": 1784882154142,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/06_cdr_safe_tools/06_cdr_safe_tools.md",
+      "accessCount": 71,
+      "lastAccessed": 1784691871893,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/07_nativeness/07_nativeness.md",
+      "accessCount": 47,
+      "lastAccessed": 1784692013907,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/02_nomenclature_strategy/02_nomenclature_strategy.md",
+      "accessCount": 38,
+      "lastAccessed": 1784691817209,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/00_README.md",
+      "accessCount": 34,
+      "lastAccessed": 1784691558783,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/05_result_interpretation/05_result_interpretation.md",
+      "accessCount": 34,
+      "lastAccessed": 1784866573291,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/03_install_access/03_install_access.md",
+      "accessCount": 33,
+      "lastAccessed": 1784690588810,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/05_humanize_sapiens/05_humanize_sapiens.md",
+      "accessCount": 33,
+      "lastAccessed": 1784691660600,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/02_input_data_prep/02_input_data_prep.md",
+      "accessCount": 32,
+      "lastAccessed": 1784691436395,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/10_ranking_report/10_ranking_report.md",
+      "accessCount": 32,
+      "lastAccessed": 1784691718334,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/01_tool_understanding/01_tool_understanding.md",
+      "accessCount": 30,
+      "lastAccessed": 1784690089684,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/06_advanced_ai/06_advanced_ai.md",
+      "accessCount": 27,
+      "lastAccessed": 1784690087994,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/04_sequence_qc/04_sequence_qc.md",
+      "accessCount": 27,
+      "lastAccessed": 1784691561066,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/00_README.md",
+      "accessCount": 26,
+      "lastAccessed": 1784689845428,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/08_structure/08_structure.md",
+      "accessCount": 26,
+      "lastAccessed": 1784691559905,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/07_peptide_cyclic/07_peptide_cyclic.md",
+      "accessCount": 25,
+      "lastAccessed": 1784690214935,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/09_developability/09_developability.md",
+      "accessCount": 24,
+      "lastAccessed": 1784691621762,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/11_appendix/11_appendix.md",
+      "accessCount": 24,
+      "lastAccessed": 1784691769811,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/08_antibody_fab/08_antibody_fab.md",
+      "accessCount": 23,
+      "lastAccessed": 1784690363351,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/03_setup/03_setup.md",
+      "accessCount": 23,
+      "lastAccessed": 1784691913237,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/04_basic_usage/04_basic_usage.md",
+      "accessCount": 22,
+      "lastAccessed": 1784689793544,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/09_nanobody/09_nanobody.md",
+      "accessCount": 21,
+      "lastAccessed": 1784689792014,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/11_nucleic_acid/11_nucleic_acid.md",
+      "accessCount": 21,
+      "lastAccessed": 1784690012384,
+      "type": "file"
+    },
+    {
+      "path": "humanization/humanization_guide/01_why_humanization/01_why_humanization.md",
+      "accessCount": 21,
+      "lastAccessed": 1784691667945,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/02_databases/02_databases.md",
+      "accessCount": 19,
+      "lastAccessed": 1784876818676,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/10_small_molecule/10_small_molecule.md",
+      "accessCount": 18,
+      "lastAccessed": 1784689883310,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/01_concepts/01_concepts.md",
+      "accessCount": 18,
+      "lastAccessed": 1784689936133,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/03_setup/03_setup.md",
+      "accessCount": 16,
+      "lastAccessed": 1784690205199,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/05_humanness/05_humanness.md",
+      "accessCount": 16,
+      "lastAccessed": 1784867098117,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/06_structure/06_structure.md",
+      "accessCount": 15,
+      "lastAccessed": 1784690531883,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/04_numbering/04_numbering.md",
+      "accessCount": 14,
+      "lastAccessed": 1784876216442,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/07_interface/07_interface.md",
+      "accessCount": 12,
+      "lastAccessed": 1784871151006,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/00_README.md",
+      "accessCount": 8,
+      "lastAccessed": 1784689718088,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/08_developability/08_developability.md",
+      "accessCount": 8,
+      "lastAccessed": 1784876232235,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/12_appendix/12_appendix.md",
+      "accessCount": 6,
+      "lastAccessed": 1784690076674,
+      "type": "file"
+    },
+    {
+      "path": "boltzgen/advanced/FIGURE_PLAN.md",
+      "accessCount": 5,
+      "lastAccessed": 1784689743263,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/10_appendix/10_appendix.md",
+      "accessCount": 4,
+      "lastAccessed": 1784876855556,
+      "type": "file"
+    },
+    {
+      "path": "pdf_style.css",
+      "accessCount": 3,
+      "lastAccessed": 1784866221176,
+      "type": "file"
+    },
+    {
+      "path": "ab db/antibody_db_guide/09_repertoire/09_repertoire.md",
+      "accessCount": 1,
+      "lastAccessed": 1784689587901,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

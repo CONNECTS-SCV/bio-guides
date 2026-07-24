@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"/Users/mac/Desktop/bio-guides\\\" && echo \\\"=== .omc ===\\\" && ls -la .omc/ 2>/dev/null && echo \\\"=== freeze-dir ===\\\" && cat ~/.gstack/freeze-dir.txt 2>/dev/null; echo \\\"(exit $?)\\\" && ...",
+  "error": "Exit code 1\n=== .omc ===\ntotal 16\ndrwxr-xr-x  4 mac  staff   128 Jul 22 12:25 .\ndrwxr-xr-x  9 mac  staff   288 Jul 20 14:02 ..\n-rw-------  1 mac  staff  7854 Jul 22 12:24 project-memory.json\ndrwxr-xr-x  6 mac  staff   192 Jul 22 12:24 state\n=== freeze-dir ===\n(exit 1)\n=== local settings ===",
+  "timestamp": "2026-07-22T03:25:07.139Z",
+  "retry_count": 1
+}

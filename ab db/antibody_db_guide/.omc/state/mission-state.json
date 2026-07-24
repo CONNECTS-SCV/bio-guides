@@ -1,0 +1,117 @@
+{
+  "updatedAt": "2026-07-24T07:56:57.008Z",
+  "missions": [
+    {
+      "id": "session:9299c8a3-8cbc-428b-b221-9d9a1c85caa6:none",
+      "source": "session",
+      "name": "none",
+      "objective": "Session mission",
+      "createdAt": "2026-07-24T07:53:53.693Z",
+      "updatedAt": "2026-07-24T07:56:57.008Z",
+      "status": "done",
+      "workerCount": 1,
+      "taskCounts": {
+        "total": 1,
+        "pending": 0,
+        "blocked": 0,
+        "inProgress": 0,
+        "completed": 1,
+        "failed": 0
+      },
+      "agents": [
+        {
+          "name": "general-purpose:a1dc0aa",
+          "role": "general-purpose",
+          "ownership": "a1dc0aa2b6e2086f2",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-07-24T07:56:57.008Z"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "session-start:a1dc0aa2b6e2086f2:2026-07-24T07:53:53.693Z",
+          "at": "2026-07-24T07:53:53.693Z",
+          "kind": "update",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "started general-purpose:a1dc0aa",
+          "sourceKey": "session-start:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:24.437Z",
+          "at": "2026-07-24T07:56:24.437Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:35.774Z",
+          "at": "2026-07-24T07:56:35.774Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:42.741Z",
+          "at": "2026-07-24T07:56:42.741Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:47.127Z",
+          "at": "2026-07-24T07:56:47.127Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:50.057Z",
+          "at": "2026-07-24T07:56:50.057Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:52.240Z",
+          "at": "2026-07-24T07:56:52.240Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:54.069Z",
+          "at": "2026-07-24T07:56:54.069Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:55.468Z",
+          "at": "2026-07-24T07:56:55.468Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        },
+        {
+          "id": "session-stop:a1dc0aa2b6e2086f2:2026-07-24T07:56:57.008Z",
+          "at": "2026-07-24T07:56:57.008Z",
+          "kind": "completion",
+          "agent": "general-purpose:a1dc0aa",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1dc0aa2b6e2086f2"
+        }
+      ]
+    }
+  ]
+}
