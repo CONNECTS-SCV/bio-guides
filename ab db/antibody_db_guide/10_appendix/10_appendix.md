@@ -8,13 +8,13 @@ part: Reference
 
 # Ch.10 — 부록
 
-이 과정에서 쓴 도구·데이터·체크리스트를 한곳에 모았어요. 실전에서 후보 항체를 받았을 때 이 부록만 보고도 한 바퀴 돌릴 수 있게요.
+이 과정에서 쓴 도구·데이터·체크리스트를 한곳에 모았습니다. 실전에서 후보 항체를 받았을 때 이 부록만 보고도 한 바퀴 돌릴 수 있도록 하기 위함입니다.
 
 ---
 
 ## A. Mini-pipeline — 한 번에 돌리기
 
-서열 1개를 받아 QC → humanness → 구조 → interface → liability → repertoire 까지 도는 예예요. 각 줄은 **실제로 실행해 검증한 명령**이고, 노트북이 돌리는 것과 같은 스크립트예요. 산출물은 전부 각 챕터의 `my_run/` 에 쌓입니다.
+서열 1개를 받아 QC → humanness → 구조 → interface → liability → repertoire 까지 도는 예입니다. 각 줄은 **실제로 실행해 검증한 명령**이고, 노트북이 돌리는 것과 같은 스크립트입니다. 산출물은 전부 각 챕터의 `my_run/` 에 쌓입니다.
 
 ```bash
 # 0) 환경 (Ch.03)
@@ -60,7 +60,7 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 
 ## B. 좋은 항체 분석 보고서 체크리스트
 
-최종 보고서에 이 항목들이 들어가야 해요.
+최종 보고서에 이 항목들이 들어가야 합니다.
 
 | 체크 항목 | 본 과정 챕터 |
 |-----------|--------------|
@@ -109,7 +109,7 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 | [2] | Dunbar J. et al. SAbDab. NAR 2014 | <https://academic.oup.com/nar/article/42/D1/D1140/1044118> |
 | [3] | OAS official page | <https://opig.stats.ox.ac.uk/webapps/oas/> |
 | [4] | Olsen T.H. et al. Observed Antibody Space. Protein Science 2022 | <https://onlinelibrary.wiley.com/doi/full/10.1002/pro.4205> |
-| [5] | IMGT/3Dstructure-DB Help | <https://www.imgt.org/3Dstructure-DB/doc/IMGT3DstructureDBHelp.shtml> |
+| [5] | IMGT — the international ImMunoGeneTics information system | <https://www.imgt.org/> |
 | [6] | BioPhi GitHub | <https://github.com/merck/biophi> |
 | [7] | Raybould M.I.J. et al. Thera-SAbDab. NAR 2020 | <https://academic.oup.com/nar/article/48/D1/D383/5573951> |
 | [8] | IEDB official page | <https://www.iedb.org/> |
@@ -129,16 +129,18 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 | [22] | FreeSASA official page | <https://freesasa.github.io/> |
 | [23] | TAP official page | <https://opig.stats.ox.ac.uk/webapps/sabdab-sabpred/sabpred/tap> |
 | [24] | ChimeraX GitHub | <https://github.com/RBVI/ChimeraX> |
+| [25] | OGRDB (AIRR Community germline reference) | <https://ogrdb.airr-community.org/> |
+| [26] | Jain T. et al. Biophysical properties of the clinical-stage antibody landscape. PNAS 2017 | <https://www.pnas.org/doi/10.1073/pnas.1616408114> |
 
 ---
 
 ## E. 재현 환경 (Reproducibility)
 
-이 과정의 수치·그래프가 **어디서 나왔는지**를 밝혀 둡니다. 같은 사양을 갖출 필요는 없어요 — 노트북은 여러분 환경에서 도구를 다시 돌려 `my_run/` 에 결과를 새로 만드니까요.
+이 과정의 수치·그래프가 **어디서 나왔는지**를 밝혀 둡니다. 같은 사양을 갖출 필요는 없습니다. 노트북은 여러분 환경에서 도구를 다시 돌려 `my_run/` 에 결과를 새로 만들기 때문입니다.
 
 ### E.1 노트북 실행 시간 (실측)
 
-`jupyter nbconvert --to notebook --execute` 로 **전 셀을 실제 실행해 측정**한 값이에요. 도구가 이미 설치된 상태의 실행 시간이고, **pip 설치 시간은 빠져 있어요**.
+`jupyter nbconvert --to notebook --execute` 로 **전 셀을 실제 실행해 측정**한 값입니다. 도구가 이미 설치된 상태의 실행 시간이고, **pip 설치 시간은 빠져 있습니다**.
 
 | 노트북 | 전 셀 실행 (콜드) | 두 번째 실행 (웜) | 그중 무거운 단계 |
 |--------|------------------|------------------|------------------|
@@ -151,7 +153,7 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 | `08_dev_lab.ipynb` | 3초 | 3.0초 | — |
 | `09_repertoire_lab.ipynb` | 8초 | 8.4초 | OAS unit 10 MB 다운로드 (3.8초) |
 
-본문 실습 콜아웃의 배지는 **콜드 실행 값**이에요(더 보수적인 쪽).
+본문 실습 콜아웃의 배지는 **콜드 실행 값**입니다(더 보수적인 쪽).
 
 ### E.2 측정·검증 환경
 
@@ -164,11 +166,11 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 | 네트워크 | RCSB(`files.rcsb.org`·`search.rcsb.org`·`data.rcsb.org`) · OAS(`opig.stats.ox.ac.uk`) 접속 필요 |
 | 그림 | 메트릭 차트 5종 = 노트북이 `antibody_viz.py` 로 생성 · 3D 렌더 2종(Ch.06·07) = **PyMOL(open-source) 로컬 렌더**, pip 경로에서는 재생성 불가 |
 
-> IgFold 예측 시간은 CPU 스레드 수에 민감해요(위 환경에서 4스레드 9.0초). Colab 무료 런타임은 코어가 적어 더 걸릴 수 있습니다.
+> IgFold 예측 시간은 CPU 스레드 수에 민감합니다(위 환경에서 4스레드 9.0초). Colab 무료 런타임은 코어가 적어 더 걸릴 수 있습니다.
 
 ### E.3 커밋된 레퍼런스 데이터의 출처
 
-`data/` 는 **대조군**이에요. 각 파일이 언제·무엇으로 만들어졌는지는 이렇습니다.
+`data/` 는 **대조군**입니다. 각 파일이 언제·무엇으로 만들어졌는지는 다음과 같습니다.
 
 | 파일 | 출처 · 취득 시점 |
 |------|------------------|
@@ -183,14 +185,14 @@ python scripts/fetch_rcsb_ab_snapshot.py --rows 12 \
 | `09_repertoire/data/oas_subset.tsv.gz` | **진짜 OAS data unit** — `Eliyahu_2018 / ERR2843400_Heavy_IGHM` (human PBMC, unsorted B cells, IgM heavy, HCV 코호트 subject CI15), productive 17,807 서열, **2026-07-14** 다운로드 |
 | `09_repertoire/data/oas_cdr3_length_summary.csv` | 위 unit을 `oas_cdr3_length.py` 로 집계한 결과 |
 
-> **주의 — 이전 버전(v0.2)의 정정.** v0.2의 `oas_subset.tsv.gz` 는 실제 OAS 데이터가 아니라 **합성(시뮬레이션) 서열 3,000개**(seed=20260618)였고, 그 위에서 계산한 "평균 CDR3 19.3 aa, 후보 18 aa" 도 합성 분포에서 나온 값이었어요. v0.3에서 **진짜 OAS data unit**으로 교체하고 모든 수치를 다시 계산했습니다(평균 **13.9 aa**, 후보 **13 aa**). 옛 문서를 인용 중이라면 이 수치를 갱신하세요.
+> **주의 — 이전 버전(v0.2)의 정정.** v0.2의 `oas_subset.tsv.gz` 는 실제 OAS 데이터가 아니라 **합성(시뮬레이션) 서열 3,000개**(seed=20260618)였고, 그 위에서 계산한 "평균 CDR3 19.3 aa, 후보 18 aa" 도 합성 분포에서 나온 값이었습니다. v0.3에서 **진짜 OAS data unit**으로 교체하고 모든 수치를 다시 계산했습니다(평균 **13.9 aa**, 후보 **13 aa**). 옛 문서를 인용 중이라면 이 수치를 갱신하세요.
 
 ---
 
 ### 과정을 마치며
 
-이 과정은 공개 DB(**SAbDab·OAS·IMGT·Thera-SAbDab**)와 오픈소스 도구(**ANARCI·Sapiens·IgFold·Biopython contact**)로 항체를 *numbering → humanness → 구조 → interface → developability → repertoire* 순으로 한 바퀴 돌았어요. 그것도 **읽기만 한 게 아니라 매 챕터에서 도구를 직접 돌려** `my_run/` 에 결과를 만들고 레퍼런스와 대조하면서요.
+이 과정은 공개 DB(**SAbDab·OAS·IMGT·Thera-SAbDab**)와 오픈소스 도구(**ANARCI·Sapiens·IgFold·Biopython contact**)로 항체를 *numbering → humanness → 구조 → interface → developability → repertoire* 순으로 한 바퀴 돌았습니다. 그것도 **읽기만 한 것이 아니라 매 챕터에서 도구를 직접 돌려** `my_run/` 에 결과를 만들고 레퍼런스와 대조하면서 진행했습니다.
 
-이제 `data/demo_mab.fa` 를 **여러분의 후보 서열**로 바꾸고 같은 노트북을 다시 돌려 보세요 — numbering·humanness·구조·liability·percentile 이 전부 여러분 항체 기준으로 새로 계산됩니다.
+이제 `data/demo_mab.fa` 를 **여러분의 후보 서열**로 바꾸고 같은 노트북을 다시 돌려 보세요. numbering·humanness·구조·liability·percentile 이 전부 여러분 항체 기준으로 새로 계산됩니다.
 
 처음으로 → **[00. README (과정 인덱스)](../00_README.md)**
