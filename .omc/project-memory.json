@@ -65,6 +65,12 @@
   },
   "hotPaths": [
     {
+      "path": "boltzgen/advanced/combined.md",
+      "accessCount": 126,
+      "lastAccessed": 1784913281014,
+      "type": "file"
+    },
+    {
       "path": "ab db/antibody_db_guide/combined.md",
       "accessCount": 96,
       "lastAccessed": 1784882154142,
